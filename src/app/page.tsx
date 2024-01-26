@@ -1,113 +1,199 @@
-import Image from "next/image";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import TabsContainer from "@/components/TabContainer";
+
+import { Button, buttonVariants } from "@/components/ui/button";
+import { ArrowDownToLine, CheckCircle, Leaf } from "lucide-react";
+
+import Link from "next/link";
+
+export interface Internship {
+  location: string;
+  company_logo: string;
+  ctc: string;
+  job_title: string;
+  company_name: string;
+  apply_link: string;
+  contact_person: string;
+  contact_person_info: string;
+}
+
+const internships: Internship[] = [
+  {
+    location: "New York",
+    company_logo: "/hippo-email-sent.png",
+    ctc: "$100,000 - $120,000",
+    job_title: "Software Engineer",
+    company_name: "ABC Tech",
+    apply_link: "https://example.com/apply1",
+    contact_person: "John Doe",
+    contact_person_info: "johndoe@example.com | 123-456-7890",
+  },
+  {
+    location: "San Francisco",
+    company_logo: "/hippo-email-sent.png",
+    ctc: "$90,000 - $110,000",
+    job_title: "Data Scientist",
+    company_name: "XYZ Analytics",
+    apply_link: "https://example.com/apply2",
+    contact_person: "Jane Smith",
+    contact_person_info: "janesmith@example.com | 987-654-3210",
+  },
+  {
+    location: "London",
+    company_logo: "/hippo-email-sent.png",
+    ctc: "£70,000 - £90,000",
+    job_title: "Product Manager",
+    company_name: "123 Solutions",
+    apply_link: "https://example.com/apply3",
+    contact_person: "Alice Johnson",
+    contact_person_info: "alicejohnson@example.com | 456-789-0123",
+  },
+  {
+    location: "Berlin",
+    company_logo: "/hippo-email-sent.png",
+    ctc: "€80,000 - €100,000",
+    job_title: "UI/UX Designer",
+    company_name: "Design Co.",
+    apply_link: "https://example.com/apply4",
+    contact_person: "Bob Brown",
+    contact_person_info: "bobbrown@example.com | 321-654-9870",
+  },
+  {
+    location: "Tokyo",
+    company_logo: "/hippo-email-sent.png",
+    ctc: "¥10,000,000 - ¥12,000,000",
+    job_title: "Marketing Manager",
+    company_name: "Tokyo Corp",
+    apply_link: "https://example.com/apply5",
+    contact_person: "Emily Tanaka",
+    contact_person_info: "emilytanaka@example.com | 654-987-3210",
+  },
+  {
+    location: "Sydney",
+    company_logo: "/hippo-email-sent.png",
+    ctc: "AU$120,000 - AU$140,000",
+    job_title: "Software Developer",
+    company_name: "Sydney Software Solutions",
+    apply_link: "https://example.com/apply6",
+    contact_person: "Michael Lee",
+    contact_person_info: "michaellee@example.com | 789-012-3456",
+  },
+  {
+    location: "Toronto",
+    company_logo: "/hippo-email-sent.png",
+    ctc: "CA$80,000 - CA$100,000",
+    job_title: "Project Manager",
+    company_name: "Toronto Tech",
+    apply_link: "https://example.com/apply7",
+    contact_person: "Sarah Chen",
+    contact_person_info: "sarahchen@example.com | 012-345-6789",
+  },
+  {
+    location: "Paris",
+    company_logo: "/hippo-email-sent.png",
+    ctc: "€90,000 - €110,000",
+    job_title: "Software Architect",
+    company_name: "Paris Software Solutions",
+    apply_link: "https://example.com/apply8",
+    contact_person: "Louis Dupont",
+    contact_person_info: "louisdupont@example.com | 345-678-9012",
+  },
+  {
+    location: "Singapore",
+    company_logo: "/hippo-email-sent.png",
+    ctc: "SGD 100,000 - SGD 120,000",
+    job_title: "Data Engineer",
+    company_name: "Singapore Data",
+    apply_link: "https://example.com/apply9",
+    contact_person: "Grace Lim",
+    contact_person_info: "gracelim@example.com | 678-901-2345",
+  },
+  {
+    location: "Dubai",
+    company_logo: "/hippo-email-sent.png",
+    ctc: "AED 150,000 - AED 180,000",
+    job_title: "Sales Manager",
+    company_name: "Dubai Sales Co.",
+    apply_link: "https://example.com/apply10",
+    contact_person: "Ahmed Khalid",
+    contact_person_info: "ahmedkhalid@example.com | 901-234-5678",
+  },
+];
+
+const perks = [
+  {
+    name: "Find Your Dream Job",
+    description:
+      "Browse thousands of jobs and apply for the ones that interest you.",
+    Icon: ArrowDownToLine,
+  },
+  {
+    name: "Get Hired",
+    description: "Apply for your dream job and get hired.",
+    Icon: CheckCircle,
+  },
+  {
+    name: "Grow Your Career",
+    description: "Grow your career with the best companies.",
+    Icon: Leaf,
+  },
+];
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <MaxWidthWrapper>
+        <div className="py-20 mx-auto text-center flex flex-col items-center max-w-3xl">
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            Your Gateway to Career Opportunities{" "}
+            <span className="text-blue-600">Find Your Dream Job Today</span>
+          </h1>
+          <p className="mt-6 text-lg max-w-prose text-muted-foreground">
+            Unlock Your Potential with Our Job Portal Discover a World of Career
+            Opportunities Browse Thousands of Jobs and Take the Next Step in
+            Your Career Journey
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 mt-6">
+            <Link href="/product" className={buttonVariants()}>
+              Browser Trending Jobs
+            </Link>
+            <Button>Explore More Opportunities</Button>
+          </div>
         </div>
-      </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      </MaxWidthWrapper>
+      <section className="border-t border-gray-200 bg-gray-50">
+        <MaxWidthWrapper className="py-5">
+          <div className="w-full">
+            <TabsContainer interships={internships} />
+          </div>
+        </MaxWidthWrapper>
+      </section>
+      <section className="border-t border-gray-200 bg-gray-50">
+        <MaxWidthWrapper className="py-20">
+          <div className="grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-0">
+            {perks.map((perk) => (
+              <div
+                key={perk.name}
+                className="text-center md:flex md:items-start md:text-left lg:block lg:text-center"
+              >
+                <div className="md:flex-shrink-0 flex justify-center">
+                  <div className="h-16 w-16 flex items-center justify-center rounded-full bg-blue-100 text-blue-900">
+                    {<perk.Icon className="w-1/3 h-1/3" />}
+                  </div>
+                </div>
+                <div className="mt-6 md:ml-4 md:mt-0 lg:ml-0 lg-mt-6">
+                  <h3 className="text-base font-medium text-gray-600">
+                    {perk.name}
+                  </h3>
+                  <p className="mt-2 ext-sm text-muted-foreground">
+                    {perk.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </MaxWidthWrapper>
+      </section>
+    </>
   );
 }
