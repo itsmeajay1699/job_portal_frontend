@@ -14,7 +14,9 @@ function TabsContainer({ interships }: { interships: Internship[] }) {
       <TabsContent value="internship">
         <InternshipContainer interships={interships} />
       </TabsContent>
-      <TabsContent value="job">{/* <JobContainer /> */}</TabsContent>
+      <TabsContent value="job">
+        {/* <InternshipContainer interships={interships} /> */}
+      </TabsContent>
     </Tabs>
   );
 }

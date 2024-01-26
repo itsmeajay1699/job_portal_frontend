@@ -1,13 +1,15 @@
 import { Internship } from "@/app/page";
 import Image from "next/image";
 import React from "react";
+import { Button, buttonVariants } from "./ui/button";
+import Link from "next/link";
 
 // {
-//     location: "New York",
-//     company_logo: "https://example.com/company_logo1.png",
+//     location: "New York", done
+//     company_logo: "https://example.com/company_logo1.png", done
 //     ctc: "$100,000 - $120,000",
 //     job_title: "Software Engineer",
-//     company_name: "ABC Tech",
+//     company_name: "ABC Tech", done
 //     apply_link: "https://example.com/apply1",
 //     contact_person: "John Doe",
 //     contact_person_info: "johndoe@example.com | 123-456-7890",
@@ -15,41 +17,55 @@ import React from "react";
 
 const InternshipContainer = ({ interships }: { interships: Internship[] }) => {
   return (
-    <div className="w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
       {interships.map((internship) => (
-        <div key={internship.company_name}>
-          <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="relative h-16 w-16">
+        <div key={internship.company_name} className="grid grid-row-3">
+          <div className="mb-2">
+            <div className="flex items-center space-x-2">
+              <div className="relative h-20 w-20 rounded-full">
                 <Image
                   src={internship.company_logo}
                   alt={internship.company_name}
+                  className="rounded-full object-contain"
                   fill
                 />
               </div>
               <div className="flex flex-col">
-                <h3 className="text-lg font-bold">{internship.company_name}</h3>
+                <h3 className="text-sm font-bold">{internship.company_name}</h3>
                 <p className="text-sm">{internship.location}</p>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row sm:space-x-4">
-              <div className="flex flex-col space-y-2">
-                <h3 className="text-lg font-bold">{internship.job_title}</h3>
+            <div className="">
+              <div>
+                <p className="font-semibold text-lg">{internship.job_title}</p>
                 <p className="text-sm">{internship.ctc}</p>
               </div>
-              <div className="flex flex-col space-y-2">
-                <a
-                  href={internship.apply_link}
-                  className="text-lg font-bold text-blue-500"
+              <hr className="my-1" />
+              <div>
+                <span
+                  className="font-semibold text-sm"
+                  style={{ color: "#5B21B6" }}
                 >
-                  Apply Now
-                </a>
-                <p className="text-sm">{internship.contact_person}</p>
-                <p className="text-sm">{internship.contact_person_info}</p>
+                  <strong>Contact Person: </strong>
+                  {internship.contact_person}
+                </span>
+
+                <span className="font-semibold text-sm block">
+                  <strong>Contact Info: </strong>
+                  {internship.contact_person_info}
+                </span>
               </div>
             </div>
           </div>
-          <hr className="my-4" />
+          <Link
+            href={internship.apply_link}
+            className={buttonVariants({
+              variant: "default",
+              className: "w-full mt-auto",
+            })}
+          >
+            Apply now
+          </Link>
         </div>
       ))}
     </div>
