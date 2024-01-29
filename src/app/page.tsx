@@ -1,7 +1,10 @@
+import Footer from "@/components/Footer";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import TabsContainer from "@/components/TabContainer";
 
 import { Button, buttonVariants } from "@/components/ui/button";
+import { InternshipApiData } from "@/interface";
+import { axiosReq } from "@/lib/api";
 import { ArrowDownToLine, CheckCircle, Leaf } from "lucide-react";
 
 import Link from "next/link";
@@ -139,7 +142,12 @@ const perks = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const res = await axiosReq<InternshipApiData[]>({
+    url: "/internship",
+    method: "GET",
+  });
+
   return (
     <>
       <MaxWidthWrapper>
@@ -161,10 +169,10 @@ export default function Home() {
           </div>
         </div>
       </MaxWidthWrapper>
-      <section className="border-t border-gray-200 bg-gray-50">
+      <section className="border-t border-gray-200 bg-gray-50 bg-muted">
         <MaxWidthWrapper className="py-5">
           <div className="w-full">
-            <TabsContainer interships={internships} />
+            <TabsContainer interships={res.data?.internship} />
           </div>
         </MaxWidthWrapper>
       </section>
@@ -193,6 +201,9 @@ export default function Home() {
             ))}
           </div>
         </MaxWidthWrapper>
+      </section>
+      <section className="border-t border-gray-200 bg-gray-50">
+        <Footer />
       </section>
     </>
   );

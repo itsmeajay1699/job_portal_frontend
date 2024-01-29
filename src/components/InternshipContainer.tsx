@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { Button, buttonVariants } from "./ui/button";
 import Link from "next/link";
+import { InternshipApiData } from "@/interface";
 
 // {
 //     location: "New York", done
@@ -15,30 +16,39 @@ import Link from "next/link";
 //     contact_person_info: "johndoe@example.com | 123-456-7890",
 //   },
 
-const InternshipContainer = ({ interships }: { interships: Internship[] }) => {
+const InternshipContainer = ({
+  interships,
+}: {
+  interships: InternshipApiData[];
+}) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-      {interships.map((internship) => (
-        <div key={internship.company_name} className="grid grid-row-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-8">
+      {interships?.map((internship) => (
+        <div
+          key={internship.companyName}
+          className="grid grid-row-3 rounded-lg shadow-lg bg-white px-2 py-2"
+        >
           <div className="mb-2">
             <div className="flex items-center space-x-2">
               <div className="relative h-20 w-20 rounded-full">
                 <Image
-                  src={internship.company_logo}
-                  alt={internship.company_name}
+                  src={internship.companyLogo}
+                  alt={internship.companyName}
                   className="rounded-full object-contain"
                   fill
                 />
               </div>
               <div className="flex flex-col">
-                <h3 className="text-sm font-bold">{internship.company_name}</h3>
-                <p className="text-sm">{internship.location}</p>
+                <h3 className="text-sm font-bold">{internship.companyName}</h3>
+                <p className="text-sm">{internship.internshipLocation}</p>
               </div>
             </div>
             <div className="">
               <div>
-                <p className="font-semibold text-lg">{internship.job_title}</p>
-                <p className="text-sm">{internship.ctc}</p>
+                <p className="font-semibold text-lg">
+                  {internship.internshipTitle}
+                </p>
+                <p className="text-sm">{internship.stipend}</p>
               </div>
               <hr className="my-1" />
               <div>
@@ -47,18 +57,18 @@ const InternshipContainer = ({ interships }: { interships: Internship[] }) => {
                   style={{ color: "#5B21B6" }}
                 >
                   <strong>Contact Person: </strong>
-                  {internship.contact_person}
+                  {internship.hrName}
                 </span>
 
                 <span className="font-semibold text-sm block">
                   <strong>Contact Info: </strong>
-                  {internship.contact_person_info}
+                  {internship.hrContactNumber}
                 </span>
               </div>
             </div>
           </div>
           <Link
-            href={internship.apply_link}
+            href={internship.applyLink}
             className={buttonVariants({
               variant: "default",
               className: "w-full mt-auto",
