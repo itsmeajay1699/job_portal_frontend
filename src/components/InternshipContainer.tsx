@@ -26,22 +26,22 @@ const InternshipContainer = ({
       {interships?.map((internship) => (
         <div
           key={internship.companyName}
-          className="grid grid-row-3 rounded-lg shadow-lg bg-white px-2 py-2"
+          className="grid grid-row-4 rounded-lg shadow-lg bg-white px-2 py-2"
         >
           <div className="mb-2">
-            <div className="flex items-center space-x-2">
-              <div className="relative h-20 w-20 rounded-full">
-                <Image
-                  src={internship.companyLogo}
-                  alt={internship.companyName}
-                  className="rounded-full object-contain"
-                  fill
-                />
-              </div>
-              <div className="flex flex-col">
-                <h3 className="text-sm font-bold">{internship.companyName}</h3>
-                <p className="text-sm">{internship.internshipLocation}</p>
-              </div>
+            {/* <div className="flex items-center space-x-2"> */}
+            <div className="relative aspect-[3/2]  rounded-md max-h-[100%]">
+              <Image
+                src={internship.companyLogo}
+                alt={internship.companyName}
+                className="object-cover rounded-md"
+                fill
+              />
+              {/* </div> */}
+            </div>
+            <div className="flex flex-col mt-2">
+              <h3 className="text-sm font-bold">{internship.companyName}</h3>
+              <p className="text-sm">{internship.internshipLocation}</p>
             </div>
             <div className="">
               <div>
@@ -51,7 +51,7 @@ const InternshipContainer = ({
                 <p className="text-sm">{internship.stipend}</p>
               </div>
               <hr className="my-1" />
-              <div>
+              {/* <div>
                 <span
                   className="font-semibold text-sm"
                   style={{ color: "#5B21B6" }}
@@ -64,11 +64,22 @@ const InternshipContainer = ({
                   <strong>Contact Info: </strong>
                   {internship.hrContactNumber}
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
           <Link
-            href={internship.applyLink}
+            href={{
+              pathname: `/job-description/${internship.internshipTitle}`,
+              query: {
+                companyName: internship.companyName,
+                companyLogo: internship.companyLogo,
+                internshipLocation: internship.internshipLocation,
+                stipend: internship.stipend,
+                internshipTitle: internship.internshipTitle,
+                hrName: internship.hrName,
+                hrContactNumber: internship.hrContactNumber,
+              },
+            }}
             className={buttonVariants({
               variant: "default",
               className: "w-full mt-auto",
