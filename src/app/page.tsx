@@ -3,7 +3,7 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import TabsContainer from "@/components/TabContainer";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { InternshipApiData } from "@/interface";
+import { InternshipApiData, JobApiData } from "@/interface";
 import { axiosReq } from "@/lib/api";
 import { ArrowDownToLine, CheckCircle, Leaf } from "lucide-react";
 
@@ -148,6 +148,11 @@ export default async function Home() {
     method: "GET",
   });
 
+  const jobData = await axiosReq<JobApiData[]>({
+    url: "/job",
+    method: "GET",
+  });
+
   return (
     <>
       <MaxWidthWrapper>
@@ -172,7 +177,10 @@ export default async function Home() {
       <section className="border-t border-gray-200 bg-gray-50 bg-muted">
         <MaxWidthWrapper className="py-5">
           <div className="w-full">
-            <TabsContainer interships={res.data?.internship} />
+            <TabsContainer
+              job={jobData.data?.data?.job}
+              interships={res.data?.internship}
+            />
           </div>
         </MaxWidthWrapper>
       </section>

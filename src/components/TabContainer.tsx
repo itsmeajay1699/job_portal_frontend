@@ -3,9 +3,16 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import InternshipContainer from "./InternshipContainer";
 import { Internship } from "@/app/page";
-import { InternshipApiData } from "@/interface";
+import { InternshipApiData, JobApiData } from "@/interface";
 
-function TabsContainer({ interships }: { interships: InternshipApiData[] }) {
+function TabsContainer({
+  interships,
+  job,
+}: {
+  interships: InternshipApiData[];
+  job: JobApiData[];
+}) {
+  console.log(job);
   return (
     <Tabs defaultValue="internship" className="w-full">
       <TabsList className="grid grid-cols-2 sm:w-[400px] w-full ml-auto border border-muted-secodary">
@@ -13,10 +20,10 @@ function TabsContainer({ interships }: { interships: InternshipApiData[] }) {
         <TabsTrigger value="job">Jobs</TabsTrigger>
       </TabsList>
       <TabsContent value="internship">
-        <InternshipContainer interships={interships} />
+        <InternshipContainer data={interships} />
       </TabsContent>
       <TabsContent value="job">
-        {/* <InternshipContainer interships={interships} /> */}
+        <InternshipContainer data={job} />
       </TabsContent>
     </Tabs>
   );
