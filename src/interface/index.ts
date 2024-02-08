@@ -1,3 +1,9 @@
+type Category = {
+  _id: string;
+  categoryName: string;
+  __v: number;
+};
+
 export interface InternshipApiData {
   companyName: string;
   companyLogo: string;
@@ -10,7 +16,7 @@ export interface InternshipApiData {
   hrName?: string;
   hrContactNumber?: string;
   hrEmail?: string;
-  category: string;
+  category: Category;
 }
 
 export interface JobApiData {
@@ -26,5 +32,5 @@ export interface JobApiData {
   hrName?: string;
   hrContactNumber?: string;
   hrEmail?: string;
-  category: string;
+  category: Category;
 }

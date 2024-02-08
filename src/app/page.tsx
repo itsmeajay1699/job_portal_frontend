@@ -152,6 +152,7 @@ export default async function Home() {
     url: "/job",
     method: "GET",
   });
+  
 
   return (
     <>

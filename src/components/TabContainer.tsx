@@ -12,7 +12,6 @@ function TabsContainer({
   interships: InternshipApiData[];
   job: JobApiData[];
 }) {
-  console.log(job);
   return (
     <Tabs defaultValue="internship" className="w-full">
       <TabsList className="grid grid-cols-2 sm:w-[400px] w-full ml-auto border border-muted-secodary">
@@ -20,10 +19,10 @@ function TabsContainer({
         <TabsTrigger value="job">Jobs</TabsTrigger>
       </TabsList>
       <TabsContent value="internship">
-        <InternshipContainer data={interships} />
+        <InternshipContainer data={interships} Internship={true} Job={false} />
       </TabsContent>
       <TabsContent value="job">
-        <InternshipContainer data={job} />
+        <InternshipContainer Job={true} Internship={false} data={job} />
       </TabsContent>
     </Tabs>
   );
