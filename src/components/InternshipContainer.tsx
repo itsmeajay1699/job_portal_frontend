@@ -7,8 +7,12 @@ import { InternshipApiData, JobApiData } from "@/interface";
 
 const InternshipContainer = ({
   data,
+  Internship,
+  Job,
 }: {
   data: (InternshipApiData | JobApiData)[];
+  Internship?: boolean;
+  Job?: boolean;
 }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-8">
@@ -71,6 +75,9 @@ const InternshipContainer = ({
                   (internship as JobApiData).jobTitle,
                 hrName: internship.hrName,
                 hrContactNumber: internship.hrContactNumber,
+                categoryId: internship.category._id,
+                categoryName: internship.category.categoryName,
+                internship: Internship,
               },
             }}
             className={buttonVariants({

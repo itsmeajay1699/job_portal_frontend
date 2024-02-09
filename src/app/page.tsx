@@ -152,6 +152,7 @@ export default async function Home() {
     url: "/job",
     method: "GET",
   });
+  
 
   console.log(res.data.data.internship);
 
