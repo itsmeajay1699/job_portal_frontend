@@ -153,6 +153,8 @@ export default async function Home() {
     method: "GET",
   });
 
+  console.log(res.data.data.internship);
+
   return (
     <>
       <MaxWidthWrapper>
@@ -179,7 +181,7 @@ export default async function Home() {
           <div className="w-full">
             <TabsContainer
               job={jobData.data?.data?.job}
-              interships={res.data?.internship}
+              interships={res.data.data?.internship}
             />
           </div>
         </MaxWidthWrapper>
