@@ -280,6 +280,7 @@ const Page = () => {
                 </div>
 
                 {/* created body ends here */}
+                 
               </div>
               <Button className="w-full">Create Post</Button>
             </form>
