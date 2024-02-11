@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import TabsContainer from "@/components/TabContainer";
 
@@ -152,7 +151,6 @@ export default async function Home() {
     url: "/job",
     method: "GET",
   });
-  
 
   return (
     <>
@@ -171,7 +169,7 @@ export default async function Home() {
             <Link href="/product" className={buttonVariants()}>
               Browser Trending Jobs
             </Link>
-            <Button>Explore More Opportunities</Button>
+            <Link href={"/mainPage"} className={buttonVariants()}>Explore More Opportunities</Link>
           </div>
         </div>
       </MaxWidthWrapper>
@@ -210,9 +208,6 @@ export default async function Home() {
             ))}
           </div>
         </MaxWidthWrapper>
-      </section>
-      <section className="border-t border-gray-200 bg-gray-50">
-        <Footer />
       </section>
     </>
   );

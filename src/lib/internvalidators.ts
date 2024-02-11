@@ -17,3 +17,12 @@ export const AuthCreadentialsValidate = z.object({
 });
 
 export type TAUTHCREDENTIALVALIDATER = z.infer<typeof AuthCreadentialsValidate>;
+
+export const FilterData = z.object({
+  location: z.string().optional(),
+  category: z.string().optional(),
+  stipend: z.string().optional(),
+  salary: z.string().optional(),
+});
+
+export type FILTERDATA = z.infer<typeof FilterData>;

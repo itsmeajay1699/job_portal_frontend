@@ -1,12 +1,17 @@
-import React from 'react';
+import React from "react";
 // import FilterContainer from '@/components/FilterContainer';
-import ResponsiveFilterComponent from '@/components/ResponsiveFilterComponent';
+import ResponsiveFilterComponent from "@/components/ResponsiveFilterComponent";
 const Page = () => {
   return (
-    <div>
-        <ResponsiveFilterComponent/>
-    </div>
-  )
-}
+    <section className="">
+      <div>
+        <div className="">
+          <ResponsiveFilterComponent />
+        </div>
+        <h1>Hello world</h1>
+      </div>
+    </section>
+  );
+};
 
-export default Page
+export default Page;
