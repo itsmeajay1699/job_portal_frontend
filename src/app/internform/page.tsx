@@ -6,14 +6,17 @@ import { cn } from "@/lib/utils";
 import { ArrowRight, EyeIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios, { all } from "axios";
 import zod from "zod";
 import {
   AuthCreadentialsValidate,
   TAUTHCREDENTIALVALIDATER,
 } from "@/lib/internvalidators";
 import InputArrayType from "@/components/InputArrayType";
+import { futimesSync } from "fs";
 
 const Page = () => {
   const {
@@ -31,10 +34,46 @@ const Page = () => {
   const [internshipQualification, setInternshipQualification] = useState<
     string[]
   >([]);
+  const [allCategories, setAllCategories] = useState<string[]>([]);
+  const [categoryId, setCategoryId] = useState<string | null>();
 
-  const onSubmit = (data: TAUTHCREDENTIALVALIDATER) => {
-    console.log(data);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/api/v1/category');
+        setAllCategories(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+
+  }, []);
+
+  const onSubmit = async (data: TAUTHCREDENTIALVALIDATER) => {
+    try {
+      // console.log(data);
+      // console.log(internshipLocation);
+      // console.log(internshipQualification);
+      let newdata = {
+        ...data,
+        internshipLocation: [...internshipLocation],
+        internshipQualification: [...internshipQualification],
+        category: categoryId,
+      }
+      const res = await axios.post("http://localhost:4000/api/v1/internship",newdata)
+      console.log(newdata);
+      console.log(res);
+    } catch (error) {
+
+    }
+
   };
+
+  function setId(params: any) {
+    console.log(params);
+  }
 
   return (
     <>
@@ -116,22 +155,6 @@ const Page = () => {
                   />
                 </div>
 
-                {/* <div className="grid gap-1 py-2">
-                  <Label htmlFor="qualification">Qualification</Label>
-                  <Input
-                    {...register("qualification")}
-                    className={cn({
-                      "focus-visible:ring-red-500": errors["qualification"],
-                    })}
-                    placeholder="e.g. graduate 2024"
-                  />
-                  {/* {errors["qualification"]?.message && (
-                    <p className="text-red-500 text-sm font-semibold">
-                      {errors["qualification"]?.message}
-                    </p>
-                  )} */}
-                {/* </div> */}
-
                 <div className="grid gap-1 py-2">
                   <Label htmlFor="internship description">
                     Internship description
@@ -150,39 +173,20 @@ const Page = () => {
                     </p>
                   )}
                 </div>
-                {/* 
-                <div className="grid gap-1 py-2">
-                  <Label htmlFor="internship location">
-                    Internship location
-                  </Label>
-                  <Input
-                    {...register("internshipLocation")}
-                    className={cn({
-                      "focus-visible:ring-red-500":
-                        errors["internshipLocation"],
-                    })}
-                    placeholder="e.g. Gurugram"
-                  />
-                  {errors["internshipLocation"]?.message && (
-                    <p className="text-red-500 text-sm font-semibold">
-                      {errors["internshipLocation"]?.message}
-                    </p>
-                  )}
-                </div> */}
 
                 <div className="grid gap-1 py-2">
                   <Label htmlFor="internship apply link">Apply Link</Label>
                   <Input
-                    {...register("internshipApplyLink")}
+                    {...register("applyLink")}
                     className={cn({
                       "focus-visible:ring-red-500":
-                        errors["internshipApplyLink"],
+                        errors["applyLink"],
                     })}
                     placeholder="e.g. jobportal.in"
                   />
-                  {errors["internshipApplyLink"]?.message && (
+                  {errors["applyLink"]?.message && (
                     <p className="text-red-500 text-sm font-semibold">
-                      {errors["internshipApplyLink"]?.message}
+                      {errors["applyLink"]?.message}
                     </p>
                   )}
                 </div>
@@ -258,15 +262,20 @@ const Page = () => {
                       "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     )}
                     required
+                    onChange={(event) => {
+                      const selectedOption = event.target.options[event.target.selectedIndex];
+                      const selectedOptionId = selectedOption.getAttribute('id');
+                      setCategoryId(selectedOptionId);
+                    }}
                   >
                     <option defaultValue="Select" disabled hidden>
                       Select
                     </option>
-                    <option>Tech</option>
-                    <option>Non-Tech</option>
-                    <option>Core</option>
-                    <option>Private</option>
-                    <option>Sarkari</option>
+                    {
+                      allCategories.data?.category.map((val: object) => (
+                        <option id={val._id} key={val._id}>{val.categoryName}</option>
+                      ))
+                    }
                   </select>
                 </div>
 
@@ -275,8 +284,8 @@ const Page = () => {
               <Button className="w-full">Create Post</Button>
             </form>
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
     </>
   );
 };
