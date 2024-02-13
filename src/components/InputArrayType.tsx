@@ -12,7 +12,7 @@ interface InputArrayTypeProps {
 }
 
 const InputArrayType = (props: InputArrayTypeProps) => {
-  const ref = useRef<HTMLInputElement>(null);
+  const ref = useRef<HTMLInputElement | any>(null);
   const updateItems = (value: string) => {
     const newItems = [...props.items, value];
     props.setItems(newItems);
@@ -35,8 +35,8 @@ const InputArrayType = (props: InputArrayTypeProps) => {
       style={{}}
       className="w-full"
       onKeyDown={handleKey}
-      onBlur={(e) => {
-        const value = e.target.value;
+      onBlur={(e: any) => {
+        const value: any = e.target.value;
         if (!value) return;
         updateItems(value);
         ref.current.value = "";

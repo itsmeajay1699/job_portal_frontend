@@ -51,7 +51,7 @@ const JobDescription = async ({
         <div className="flex gap-6">
           <div className="flex-1">
             <SinglePageSideBar
-              internship={searchParams.internship}
+              internship={Boolean(searchParams.internship)}
               data={res}
             />
           </div>

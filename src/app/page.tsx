@@ -142,17 +142,17 @@ const perks = [
 ];
 
 export default async function Home() {
-  const res = await axiosReq<InternshipApiData[]>({
+  const res: any = await axiosReq<InternshipApiData[]>({
     url: "/internship",
     method: "GET",
   });
 
-  const jobData = await axiosReq<JobApiData[]>({
+  const jobData: any = await axiosReq<JobApiData[]>({
     url: "/job",
     method: "GET",
   });
 
-  console.log(jobData.data)
+  console.log(jobData.data);
 
   return (
     <>

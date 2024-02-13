@@ -23,7 +23,7 @@ const Page = () => {
   const [internship, setInternship] = useState<InternshipApiData[] | []>([]);
   const [job, setJob] = useState<JobApiData[] | []>([]);
   useEffect(() => {
-    const filterObject = {};
+    const filterObject: any = {};
 
     if (location) {
       filterObject.location = location;
