@@ -39,7 +39,7 @@ const Page = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/api/v1/category"
+          `${process.env.NEXT_PUBLIC_API_URL_DEV}/category`
         );
         setAllCategories(response.data);
       } catch (error) {
@@ -61,7 +61,10 @@ const Page = () => {
         jobQualification: [...jobQualification],
         category: categoryId,
       };
-      const res = await axios.post("http://localhost:4000/api/v1/job", newdata);
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL_DEV}/job`,
+        newdata
+      );
       console.log(newdata);
       console.log(res);
     } catch (error) {}
@@ -266,7 +269,7 @@ const Page = () => {
                     <option defaultValue="Select" disabled hidden>
                       Select
                     </option>
-                    {allCategories.data?.category.map((val: any) => (
+                    {allCategories?.data?.category.map((val: any) => (
                       <option id={val._id} key={val._id}>
                         {val.categoryName}
                       </option>

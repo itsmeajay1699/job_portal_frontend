@@ -44,7 +44,7 @@ const Page = () => {
       const fetchInternship = async () => {
         try {
           const res = await axios.get(
-            "http://localhost:4000/api/v1/internship",
+            `${process.env.NEXT_PUBLIC_API_URL_DEV}/internship`,
             {
               params: filterObject,
             }
@@ -60,9 +60,12 @@ const Page = () => {
       delete filterObject.stipend;
       const fetchJob = async () => {
         try {
-          const res = await axios.get("http://localhost:4000/api/v1/job", {
-            params: filterObject,
-          });
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_URL_DEV}/job`,
+            {
+              params: filterObject,
+            }
+          );
 
           setJob(res.data.job);
         } catch (err) {
