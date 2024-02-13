@@ -12,10 +12,28 @@ import { FilterData, FILTERDATA } from "@/lib/internvalidators";
 
 type filtertype = "internship" | "job";
 
-const FilterContainer = () => {
+const FilterContainer = ({
+  setLocation,
+  setCategory,
+  setStipend,
+  setSalary,
+  stipend,
+  isIntern,
+  setIsIntern,
+  salary,
+}: {
+  setLocation: (location: string) => void;
+  setCategory: (category: string) => void;
+  setStipend: (stipend: string) => void;
+  setSalary: (salary: string) => void;
+  stipend: string | null;
+  salary: string | null;
+  isIntern: boolean;
+  setIsIntern: (isIntern: boolean) => void;
+}) => {
   const locations = [
     "select location",
-    "Delhi",
+    "delhi",
     "Gurugram",
     "Noida",
     "Bengaluru",
@@ -37,22 +55,19 @@ const FilterContainer = () => {
     "Backend Developer",
   ];
   const types: filtertype[] = ["internship", "job"];
-  const [isIntern, setIsIntern] = useState<boolean>(true);
-  const [stipend, setStipend] = useState(0);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm<FILTERDATA>({
-    resolver: zodResolver(FilterData),
-  });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   setValue,
+  //   formState: { errors },
+  // } = useForm<FILTERDATA>({
+  //   resolver: zodResolver(FilterData),
+  // });
 
   const updateStipend = (currStipend: any) => {
     setStipend(currStipend);
   };
-  const [salary, setSalary] = useState(0);
 
   const onSubmit = (data: FILTERDATA) => {
     console.log(data);
@@ -86,7 +101,10 @@ const FilterContainer = () => {
         <Label className="text-[#F8FAFC] text-lg" htmlFor="Location">
           Location:{" "}
         </Label>
-        <select {...register("location")} className="w-full p-2 rounded-lg">
+        <select
+          onChange={(e) => setLocation(e.target.value)}
+          className="w-full p-2 rounded-lg"
+        >
           {locations.map((val, index) => (
             <option key={index} value={val}>
               {val}
@@ -95,24 +113,30 @@ const FilterContainer = () => {
         </select>
       </div>
 
-      <div className="mt-2 mb-2 mx-5">
+      {/* <div className="mt-2 mb-2 mx-5">
         <Label className="text-[#F8FAFC] text-lg" htmlFor="Job Title">
           Job Title:{" "}
         </Label>
-        <select {...register("category")} className="w-full p-2 rounded-lg">
+        <select
+          onChange={(e) => setCategory(e.target.value)}
+          className="w-full p-2 rounded-lg"
+        >
           {jobTitles.map((val, index) => (
             <option key={index} value={val}>
               {val}
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
 
       <div className="mt-5 mb-5 mx-5">
         <Label className="text-[#F8FAFC] text-lg" htmlFor="Category">
           Category:{" "}
         </Label>
-        <select {...register("category")} className="w-full p-2 rounded-lg">
+        <select
+          onChange={(e) => setCategory(e.target.value)}
+          className="w-full p-2 rounded-lg"
+        >
           {categories.map((val, index) => (
             <option key={index} value={val}>
               {val}
@@ -134,7 +158,8 @@ const FilterContainer = () => {
               max={150}
               step={10}
               defaultValue={0}
-              {...register("stipend")}
+              onChange={(e) => setStipend(e.target.value)}
+
               // onChange={(e) => updateStipend(e.target.value)}
             />
             <p className="ml-1 text-[#F8FAFC] w-full">{stipend} K/month</p>
@@ -151,8 +176,7 @@ const FilterContainer = () => {
               className="mt-1"
               step={10}
               defaultValue={0}
-              // onChange={(e) => updateSalary(e.target.value)}
-              {...register("salary")}
+              onChange={(e) => setSalary(e.target.value)}
             />
             <p className="text-[#F8FAFC]">{salary} LPA</p>
           </div>

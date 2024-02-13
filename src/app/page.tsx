@@ -152,7 +152,7 @@ export default async function Home() {
     method: "GET",
   });
 
-  console.log(res.data.data.internship);
+  console.log(jobData.data)
 
   return (
     <>
@@ -171,7 +171,9 @@ export default async function Home() {
             <Link href="/product" className={buttonVariants()}>
               Browser Trending Jobs
             </Link>
-            <Link href={"/mainPage"} className={buttonVariants()}>Explore More Opportunities</Link>
+            <Link href={"/mainPage"} className={buttonVariants()}>
+              Explore More Opportunities
+            </Link>
           </div>
         </div>
       </MaxWidthWrapper>
@@ -179,8 +181,8 @@ export default async function Home() {
         <MaxWidthWrapper className="py-5">
           <div className="w-full">
             <TabsContainer
-              job={jobData.data?.data?.job}
-              interships={res.data.data?.internship}
+              job={jobData.data?.job}
+              interships={res.data?.internship}
             />
           </div>
         </MaxWidthWrapper>

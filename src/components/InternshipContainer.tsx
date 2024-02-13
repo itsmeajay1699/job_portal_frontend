@@ -4,18 +4,25 @@ import React from "react";
 import { Button, buttonVariants } from "./ui/button";
 import Link from "next/link";
 import { InternshipApiData, JobApiData } from "@/interface";
+import { cn } from "@/lib/utils";
 
 const InternshipContainer = ({
   data,
   Internship,
   Job,
+  className,
 }: {
   data: (InternshipApiData | JobApiData)[];
   Internship?: boolean;
   Job?: boolean;
+  className?: string;
 }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-8">
+    <div
+      className={cn(
+        `grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-8 ${className}`
+      )}
+    >
       {data?.map((internship) => (
         <div
           key={internship.companyName}
