@@ -4,7 +4,7 @@ import TabsContainer from "@/components/TabContainer";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { InternshipApiData, JobApiData } from "@/interface";
 import { axiosReq } from "@/lib/api";
-import { ArrowDownToLine, CheckCircle, Leaf } from "lucide-react";
+import { CheckCircle, FingerprintIcon, Leaf } from "lucide-react";
 
 import Link from "next/link";
 
@@ -127,7 +127,7 @@ const perks = [
     name: "Find Your Dream Job",
     description:
       "Browse thousands of jobs and apply for the ones that interest you.",
-    Icon: ArrowDownToLine,
+    Icon: FingerprintIcon,
   },
   {
     name: "Get Hired",
@@ -158,17 +158,19 @@ export default async function Home() {
         <div className="py-20 mx-auto text-center flex flex-col items-center max-w-3xl">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             Your Gateway to Career Opportunities{" "}
-            <span className="text-blue-600">Find Your Dream Job Today</span>
+            <span className="text-blue-600">
+              Find Your Dream Job & Internship Today
+            </span>
           </h1>
           <p className="mt-6 text-lg max-w-prose text-muted-foreground">
             Unlock Your Potential with Our Job Portal Discover a World of Career
-            Opportunities Browse Thousands of Jobs and Take the Next Step in
-            Your Career Journey
+            Opportunities Browse Thousands of Jobs & Internships and Take the
+            Next Step in Your Career Journey
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
-            <Link href="/product" className={buttonVariants()}>
+            {/* <Link href="/product" className={buttonVariants()}>
               Browser Trending Jobs
-            </Link>
+            </Link> */}
             <Link href={"/mainPage"} className={buttonVariants()}>
               Explore More Opportunities
             </Link>

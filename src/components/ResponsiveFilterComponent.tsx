@@ -145,7 +145,7 @@ const FilterContainer = ({
         </select>
       </div>
 
-      <div className="mt-5 mb-5 mx-5 md:mx-1.5">
+      {/* <div className="mt-5 mb-5 mx-5 md:mx-1.5">
         {isIntern ? (
           <div className="flex justify-between mx-5 gap-3 items-center">
             <Label className="text-[#F8FAFC] text-md" htmlFor="Stipend">
@@ -181,7 +181,7 @@ const FilterContainer = ({
             <p className="text-[#F8FAFC] text-sm">{salary} LPA</p>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 // import FilterContainer from '@/components/FilterContainer';
 import ResponsiveFilterComponent from "@/components/ResponsiveFilterComponent";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
@@ -33,6 +33,7 @@ const Page = ({
   let searchCategory = searchParams.category;
 
   useEffect(() => {
+    console.log("searchParams", searchParams);
     const filterObject: any = {};
 
     if (searchCategory) {
@@ -54,6 +55,8 @@ const Page = ({
 
     if (isIntern) {
       delete filterObject.salary;
+
+      console.log("filterObject", filterObject)
 
       const fetchInternship = async () => {
         try {
@@ -88,13 +91,18 @@ const Page = ({
       };
       fetchJob();
     }
-  }, [location, category, stipend, salary, isIntern]);
+
+    return () => {
+      setInternship([]);
+      setJob([]);
+    };
+  }, [location, category, stipend, salary, isIntern, category]);
 
   return (
     <section className="bg-muted py-8">
       <MaxWidthWrapper className="max-w-[95rem]">
-        <div className="md:grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="hidden md:block">
+        <div className="md:grid grid-cols-2 lg:grid-cols-5 xl:grid-cols-4 gap-4">
+          <div className="hidden md:block lg:col-span-2 xl:col-span-1">
             <ResponsiveFilterComponent
               setLocation={setLocation}
               setCategory={setCategory}
@@ -130,7 +138,7 @@ const Page = ({
                   data={internship}
                   Internship={true}
                   Job={false}
-                  className="lg:grid-cols-2 md:grid-cols-1 xl:grid-cols-4"
+                  className="lg:grid-cols-2 md:grid-cols-1 xl:grid-cols-3"
                 />
               ) : (
                 <InternshipContainer

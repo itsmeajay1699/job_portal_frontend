@@ -48,17 +48,18 @@ const JobDescription = async ({
   return (
     <div className="bg-muted py-8 px-6 sm:px-0">
       <MaxWidthWrapper>
-        <div className="flex gap-6">
-          <div className="flex-1">
+        <div className="flex  sm:flex-row flex-col-reverse gap-6">
+          <div className="w-full md:w-1/4 min-w-[280px]">
             <SinglePageSideBar
               internship={Boolean(searchParams.internship)}
               data={res}
+              className="grid-cols-2 sm:grid-cols-1 gap-6"
             />
           </div>
           <div className="grid justify-center items-start self-start gap-4">
             {/* img section */}
             <div className="w-full flex flex-col items-start">
-              <div className="relative md:w-44 w-full h-44 border border-red ">
+              <div className="relative w-1/2 min-w-[300px]  h-64 border border-red ">
                 <Image
                   src={searchParams.companyLogo}
                   alt={searchParams.companyName}

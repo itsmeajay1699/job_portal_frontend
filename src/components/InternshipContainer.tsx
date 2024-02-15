@@ -34,7 +34,7 @@ const InternshipContainer = ({
               <Image
                 src={internship.companyLogo}
                 alt={internship.companyName}
-                className="object-cover rounded-md"
+                className="rounded-md object-center"
                 fill
               />
               {/* </div> */}
@@ -92,7 +92,7 @@ const InternshipContainer = ({
               className: "w-full mt-auto",
             })}
           >
-            Apply now
+            View Details
           </Link>
         </div>
       ))}
