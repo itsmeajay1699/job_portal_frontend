@@ -152,7 +152,7 @@ export default async function Home() {
     method: "GET",
   });
 
-  console.log(jobData.data);
+  console.log(res);
 
   return (
     <>

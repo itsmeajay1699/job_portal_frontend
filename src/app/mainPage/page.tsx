@@ -6,6 +6,7 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import axios from "axios";
 import InternshipContainer from "@/components/InternshipContainer";
 import { InternshipApiData, JobApiData } from "@/interface";
+import MobileFilter from "@/components/MobileFilter";
 
 type filterObjectType = {
   location: string | null;
@@ -14,7 +15,13 @@ type filterObjectType = {
   salary: string | null;
 };
 
-const Page = () => {
+const Page = ({
+  searchParams,
+}: {
+  searchParams: {
+    category: string;
+  };
+}) => {
   const [location, setLocation] = useState<string | null>("");
   const [category, setCategory] = useState<string | null>("");
   const [stipend, setStipend] = useState<string | null>("");
@@ -22,8 +29,15 @@ const Page = () => {
   const [isIntern, setIsIntern] = useState<boolean>(true);
   const [internship, setInternship] = useState<InternshipApiData[] | []>([]);
   const [job, setJob] = useState<JobApiData[] | []>([]);
+
+  let searchCategory = searchParams.category;
+
   useEffect(() => {
     const filterObject: any = {};
+
+    if (searchCategory) {
+      setCategory(searchCategory);
+    }
 
     if (location) {
       filterObject.location = location;
@@ -78,9 +92,9 @@ const Page = () => {
 
   return (
     <section className="bg-muted py-8">
-      <MaxWidthWrapper>
-        <div className="flex gap-4">
-          <div className="">
+      <MaxWidthWrapper className="max-w-7xl">
+        <div className="md:grid grid-cols-3 gap-4">
+          <div className="hidden md:block">
             <ResponsiveFilterComponent
               setLocation={setLocation}
               setCategory={setCategory}
@@ -92,7 +106,22 @@ const Page = () => {
               setIsIntern={setIsIntern}
             />
           </div>
-          <section className="flex-1">
+
+          <div className="md:hidden bg-white p-4 rounded-md shadow-md col-span-2">
+            {/* mobile filters */}
+            <MobileFilter
+              setLocation={setLocation}
+              setCategory={setCategory}
+              setStipend={setStipend}
+              setSalary={setSalary}
+              stipend={stipend}
+              salary={salary}
+              isIntern={isIntern}
+              setIsIntern={setIsIntern}
+            />
+          </div>
+
+          <section className="bg-white p-4 rounded-md shadow-md col-span-2">
             <h1 className="text-xl font-bold">Suggested Internship</h1>
             {/* here will i show the resulted internship and job */}
             <div className="">
@@ -101,9 +130,15 @@ const Page = () => {
                   data={internship}
                   Internship={true}
                   Job={false}
+                  className="lg:grid-cols-3 md:grid-cols-2"
                 />
               ) : (
-                <InternshipContainer data={job} Internship={false} Job={true} />
+                <InternshipContainer
+                  data={job}
+                  Internship={false}
+                  Job={true}
+                  className="lg:grid-cols-3 md:grid-cols-2"
+                />
               )}
             </div>
           </section>

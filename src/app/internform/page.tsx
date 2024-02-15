@@ -67,8 +67,6 @@ const Page = () => {
         `${process.env.NEXT_PUBLIC_API_URL_DEV}/internship`,
         newdata
       );
-      console.log(newdata);
-      console.log(res);
     } catch (error) {}
   };
 

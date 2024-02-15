@@ -77,7 +77,7 @@ const FilterContainer = ({
     setSalary(currSalary);
   };
   return (
-    <div className="bg-primary max-w-[350px] py-6">
+    <div className="bg-primary py-6 rounded-md shadow-md">
       <div className="flex justify-center text-[#F8FAFC] lg:text-4xl  md:text-3xl  sm:text-2xl  text-3xl">
         <h1>FIL</h1>
         <Filter className="my-auto w-10 h-12 lg:w-10 lg:h-12 md:w-8 md:h-10 sm:w-6 sm:h-8 pt-2" />
@@ -162,10 +162,10 @@ const FilterContainer = ({
 
               // onChange={(e) => updateStipend(e.target.value)}
             />
-            <p className="ml-1 text-[#F8FAFC] w-full">{stipend} K/month</p>
+            <p className="ml-1 text-[#F8FAFC]">{stipend} K/month</p>
           </div>
         ) : (
-          <div className="flex justify-between mx-5">
+          <div className="flex justify-between mx-5 items-center">
             <Label className="text-[#F8FAFC] text-lg" htmlFor="Salary">
               Salary:
             </Label>
