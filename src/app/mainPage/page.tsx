@@ -92,8 +92,8 @@ const Page = ({
 
   return (
     <section className="bg-muted py-8">
-      <MaxWidthWrapper className="max-w-7xl">
-        <div className="md:grid grid-cols-3 gap-4">
+      <MaxWidthWrapper className="max-w-[95rem]">
+        <div className="md:grid grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="hidden md:block">
             <ResponsiveFilterComponent
               setLocation={setLocation}
@@ -121,7 +121,7 @@ const Page = ({
             />
           </div>
 
-          <section className="bg-white p-4 rounded-md shadow-md col-span-2">
+          <section className="bg-white p-4 rounded-md shadow-md col-span-1 lg:col-span-3">
             <h1 className="text-xl font-bold">Suggested Internship</h1>
             {/* here will i show the resulted internship and job */}
             <div className="">
@@ -130,7 +130,7 @@ const Page = ({
                   data={internship}
                   Internship={true}
                   Job={false}
-                  className="lg:grid-cols-3 md:grid-cols-2"
+                  className="lg:grid-cols-2 md:grid-cols-1 xl:grid-cols-4"
                 />
               ) : (
                 <InternshipContainer

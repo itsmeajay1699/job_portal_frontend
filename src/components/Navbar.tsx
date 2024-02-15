@@ -3,6 +3,8 @@ import MaxWidthWrapper from "./MaxWidthWrapper";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import DropDownMenu from "./DropDownMenu";
+import { useRef } from "react";
+import { Menu } from "lucide-react";
 
 const Navbar = () => {
   const categories = [
@@ -22,7 +24,7 @@ const Navbar = () => {
         {/* logo div */}
         <div className="flex justify-between items-center">
           <Link href={"/"}>
-            <div className="relative w-24 h-12">
+            <div className="relative sm:w-24 w-12 h-12">
               <Image
                 className=""
                 src={"/comapnyLogo.jpg"}
@@ -35,7 +37,7 @@ const Navbar = () => {
           {/* text */}
           {/* navLinks */}
 
-          <div className="flex gap-4 relative">
+          <div className="flex sm:gap-4 gap-2 relative ">
             <Link
               href={"/"}
               // className="link-class"
@@ -56,10 +58,14 @@ const Navbar = () => {
               More Opportunity
             </Link>
 
-            <div>
+            <div
+            className="sm:flex hidden"
+            >
               <DropDownMenu categories={categories} />
             </div>
           </div>
+
+          {/* mobile menu */}
         </div>
       </MaxWidthWrapper>
     </header>

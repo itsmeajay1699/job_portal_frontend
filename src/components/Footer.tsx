@@ -19,9 +19,11 @@ const Footer = () => {
               <div>
                 <h4 className="mb-5 font-bold text-2xl w-5">Careers4U</h4>
                 <p className="text-muted-foreground">
-                  We are a team of passionate people whose goal is to improve
-                  everyone&rsquo;s life through disruptive products. We build
-                  great products to solve your business problems.
+                  We are a team of professionals who are dedicated to providing
+                  the best job opportunities to the people who are looking for
+                  them. We have a wide range of job opportunities available for
+                  you. You can find the job that suits you the best. We are here
+                  to help you in finding the best job opportunities.
                 </p>
               </div>
 
@@ -89,23 +91,23 @@ const Footer = () => {
                 <h6 className="mb-5 font-bold text-lg">Site Links</h6>
                 <ul className="space-y-2 cursor-pointer text-muted-foreground">
                   <li>
-                    <Link href="http://localhost:3000/about">About Us</Link>
+                    <Link href="/about">About Us</Link>
                   </li>
 
                   <li>
                     {" "}
-                    <Link href="http://localhost:3000/contact-us">
+                    <Link href="/contact-us">
                       Contact Us
                     </Link>
                   </li>
                   <li>
                     {" "}
-                    <Link href="http://localhost:3000/disclaimer">
+                    <Link href="/disclaimer">
                       Disclaimer
                     </Link>
                   </li>
                   <li>
-                    <Link href="http://localhost:3000/privacy-policy">
+                    <Link href="/privacy-policy">
                       Privacy Policy
                     </Link>
                   </li>
@@ -116,12 +118,12 @@ const Footer = () => {
 
           <div className=" mt-5 md:flex justify-between text-center">
             <p>
-              Copyright &copy; {new Date().getFullYear()} internburner.com | All
+              Copyright &copy; {new Date().getFullYear()} careers4u.live | All
               rights reserved
             </p>
 
             <p className="cursor-pointer">
-              <Link href="http://localhost:3000/sitemap">Sitemap</Link>
+              <Link href="/sitemap">Sitemap</Link>
             </p>
           </div>
         </div>

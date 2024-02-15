@@ -148,37 +148,37 @@ const FilterContainer = ({
       <div className="mt-5 mb-5 mx-5 md:mx-1.5">
         {isIntern ? (
           <div className="flex justify-between mx-5 gap-3 items-center">
-            <Label className="text-[#F8FAFC] text-lg" htmlFor="Stipend">
+            <Label className="text-[#F8FAFC] text-md" htmlFor="Stipend">
               Stipend:
             </Label>
             <input
-              className="w-full mt-1"
+              className="mt-1 w-full flex-1"
               type="range"
               min={0}
-              max={150}
-              step={10}
+              max={100}
+              step={5}
               defaultValue={0}
               onChange={(e) => setStipend(e.target.value)}
 
               // onChange={(e) => updateStipend(e.target.value)}
             />
-            <p className="ml-1 text-[#F8FAFC]">{stipend} K/month</p>
+            <p className="text-sm ml-2 text-[#F8FAFC]">{stipend} K/month</p>
           </div>
         ) : (
-          <div className="flex justify-between mx-5 items-center">
-            <Label className="text-[#F8FAFC] text-lg" htmlFor="Salary">
+          <div className="flex justify-between mx-5 gap-3 items-center">
+            <Label className="text-[#F8FAFC] text-md" htmlFor="Salary">
               Salary:
             </Label>
             <input
               type="range"
               min={0}
               max={150}
-              className="mt-1"
-              step={10}
+              className="mt-1 flex-1"
+              step={5}
               defaultValue={0}
               onChange={(e) => setSalary(e.target.value)}
             />
-            <p className="text-[#F8FAFC]">{salary} LPA</p>
+            <p className="text-[#F8FAFC] text-sm">{salary} LPA</p>
           </div>
         )}
       </div>

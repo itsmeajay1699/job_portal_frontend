@@ -152,8 +152,6 @@ export default async function Home() {
     method: "GET",
   });
 
-  console.log(res);
-
   return (
     <>
       <MaxWidthWrapper>
