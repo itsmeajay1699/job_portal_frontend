@@ -4,6 +4,8 @@ import * as https from "https";
 import { Method } from "axios";
 export {};
 
+export const revalidate = 3600;
+
 declare global {
   type AxiosConfig = { url: string; method: Method; data?: object };
 }

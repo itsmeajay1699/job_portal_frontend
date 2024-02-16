@@ -19,15 +19,15 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="bg-primary py-2 text-secondary">
+    <header className="bg-primary text-secondary">
       <MaxWidthWrapper>
         {/* logo div */}
         <div className="flex justify-between items-center">
           <Link href={"/"}>
-            <div className="relative sm:w-24 w-12 h-12">
+            <div className="relative sm:w-36 w-28 h-24 sm:h-28">
               <Image
                 className=""
-                src={"/comapnyLogo.jpg"}
+                src={"/comapnyLogo.png"}
                 alt="companyLogo"
                 fill
               />
@@ -58,9 +58,7 @@ const Navbar = () => {
               More Opportunity
             </Link>
 
-            <div
-            className="sm:flex hidden"
-            >
+            <div className="sm:flex hidden">
               <DropDownMenu categories={categories} />
             </div>
           </div>
