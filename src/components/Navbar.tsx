@@ -19,15 +19,15 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="bg-primary text-secondary">
+    <header className="bg-primary py-2 text-secondary">
       <MaxWidthWrapper>
         {/* logo div */}
         <div className="flex justify-between items-center">
           <Link href={"/"}>
-            <div className="relative sm:w-36 w-28 h-24 sm:h-28">
+            <div className="relative  w-[5rem] h-[4.5rem]">
               <Image
                 className=""
-                src={"/comapnyLogo.png"}
+                src={"/companyLogo.png"}
                 alt="companyLogo"
                 fill
               />
