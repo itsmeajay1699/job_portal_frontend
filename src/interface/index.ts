@@ -34,3 +34,4 @@ export interface JobApiData {
   hrEmail?: string;
   category: Category;
 }
+

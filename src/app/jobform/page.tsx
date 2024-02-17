@@ -31,24 +31,23 @@ const Page = () => {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const [jobLocation, setjobLocation] = useState<string[]>([]);
-  const [jobQualification, setjobQualification] = useState<
-    string[]
-  >([]);
-  const [allCategories, setAllCategories] = useState<string[]>([]);
+  const [jobQualification, setjobQualification] = useState<string[]>([]);
+  const [allCategories, setAllCategories] = useState<any>([]);
   const [categoryId, setCategoryId] = useState<string | null>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/v1/category');
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL_DEV}/category`
+        );
         setAllCategories(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-
   }, []);
 
   const onSubmit = async (data: TAUTHCREDENTIALVALIDATER) => {
@@ -61,14 +60,14 @@ const Page = () => {
         jobLocation: [...jobLocation],
         jobQualification: [...jobQualification],
         category: categoryId,
-      }
-      const res = await axios.post("http://localhost:4000/api/v1/job",newdata)
+      };
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL_DEV}/job`,
+        newdata
+      );
       console.log(newdata);
       console.log(res);
-    } catch (error) {
-
-    }
-
+    } catch (error) {}
   };
 
   function setId(params: any) {
@@ -156,14 +155,11 @@ const Page = () => {
                 </div>
 
                 <div className="grid gap-1 py-2">
-                  <Label htmlFor="job description">
-                    job description
-                  </Label>
+                  <Label htmlFor="job description">job description</Label>
                   <Input
                     {...register("jobDescription")}
                     className={cn({
-                      "focus-visible:ring-red-500":
-                        errors["jobDescription"],
+                      "focus-visible:ring-red-500": errors["jobDescription"],
                     })}
                     placeholder="jobDescription"
                   />
@@ -179,8 +175,7 @@ const Page = () => {
                   <Input
                     {...register("applyLink")}
                     className={cn({
-                      "focus-visible:ring-red-500":
-                        errors["applyLink"],
+                      "focus-visible:ring-red-500": errors["applyLink"],
                     })}
                     placeholder="e.g. jobportal.in"
                   />
@@ -263,19 +258,22 @@ const Page = () => {
                     )}
                     required
                     onChange={(event) => {
-                      const selectedOption = event.target.options[event.target.selectedIndex];
-                      const selectedOptionId = selectedOption.getAttribute('id');
+                      const selectedOption =
+                        event.target.options[event.target.selectedIndex];
+                      const selectedOptionId = selectedOption.getAttribute(
+                        "id"
+                      );
                       setCategoryId(selectedOptionId);
                     }}
                   >
                     <option defaultValue="Select" disabled hidden>
                       Select
                     </option>
-                    {
-                      allCategories.data?.category.map((val: object) => (
-                        <option id={val._id} key={val._id}>{val.categoryName}</option>
-                      ))
-                    }
+                    {allCategories?.data?.category.map((val: any) => (
+                      <option id={val._id} key={val._id}>
+                        {val.categoryName}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
@@ -285,8 +283,8 @@ const Page = () => {
               <Button className="w-full">Create Post</Button>
             </form>
           </div>
-        </div >
-      </div >
+        </div>
+      </div>
     </>
   );
 };

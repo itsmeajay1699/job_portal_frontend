@@ -15,11 +15,11 @@ const JobdataCard = ({
   return (
     <div className="w-full grid gap-2">
       {/* img */}
-      <div className="relative h-24 w-1/2">
+      <div className="relative h-52 w-full">
         <Image
           src={data.companyLogo}
           alt={data.companyName}
-          className="rounded-md object-center"
+          className="rounded-md object-center max-h-[100%] w-full h-full"
           fill
         />
       </div>

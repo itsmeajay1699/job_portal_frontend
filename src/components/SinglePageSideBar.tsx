@@ -1,17 +1,20 @@
 import { InternshipApiData, JobApiData } from "@/interface";
 import React from "react";
 import JobInternshipCard from "./jobInternshipCard";
+import { cn } from "@/lib/utils";
 
 const SinglePageSideBar = ({
   data,
   internship,
+  className,
 }: {
-  data: (InternshipApiData | JobApiData)[];
+  data: any;
   internship: boolean;
+  className?: string;
 }) => {
   return (
-    <div className="fpx-2 grid gap-6">
-      {data?.data?.data?.map((item) => (
+    <div className={cn("grid gap-6", className)}>
+      {data?.data?.data?.map((item: any) => (
         <div key={item._id}>
           <JobInternshipCard internship={internship} data={item} />
         </div>
