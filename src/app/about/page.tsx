@@ -4,10 +4,10 @@ const AboutUs = () => {
       <div className=" flex flex-1 text-2xl justify-start items-center flex-col gap-6">
         <h4 className="text-3xl font-bold">About Us</h4>
 
-        <h5 className="font-bold">Welcome to InternBurner</h5>
+        <h5 className="font-bold">Welcome to Careers4u</h5>
 
         <p className="w-1/2">
-          At InternBurner.com, we are dedicated to connecting talented
+          At Careers4u.com, we are dedicated to connecting talented
           individuals with exciting internship opportunities and various
           software engineering positions. Whether you&apos;re seeking
           internships, full-time roles, or part-time gigs, we&apos;ve got you
@@ -23,7 +23,7 @@ const AboutUs = () => {
           opportunities for everyone.
         </p>
 
-        <h6 className="font-bold">Why Choose InternBurner.com?</h6>
+        <h6 className="font-bold">Why Choose Careers4u.live?</h6>
 
         <div className="w-1/2">
           <li>
@@ -35,7 +35,7 @@ const AboutUs = () => {
             and apply for positions that match your criteria.
           </li>
           <li>
-            Quality Assurance: We ensure that all listings on InternBurner.com
+            Quality Assurance: We ensure that all listings on Careers4u.live
             meet our quality standards, providing you with legitimate and
             valuable opportunities.
           </li>
@@ -44,13 +44,13 @@ const AboutUs = () => {
 
         <p className="w-1/2">
           Got questions or inquiries? Feel free to reach out to us at
-          contact@internburner.com. Our team is here to assist you every step of
+          manish888210@gmail.com. Our team is here to assist you every step of
           the way.
         </p>
 
         <p className="w-1/2">
           Start your journey towards a rewarding career in software engineering
-          with InternBurner.com today!
+          with Careers4u.live today!
         </p>
       </div>
     </section>

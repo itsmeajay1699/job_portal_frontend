@@ -4,18 +4,18 @@ const PrivacyPolicy = () => {
       <div className=" flex flex-1 text-2xl justify-start items-center flex-col gap-6">
         <h4 className="text-3xl font-bold">Privacy Policy</h4>
 
-        <h5 className="font-bold">Welcome to InternBurner</h5>
+        <h5 className="font-bold">Welcome to Careers4u</h5>
 
         <p className="w-1/2">
           This Privacy Policy outlines how we collect, use, maintain, and
           disclose information obtained from users (referred to as
-          &quot;you&quot; or &quot;your&quot;) of our website, InternBurner.com.
+          &quot;you&quot; or &quot;your&quot;) of our website, Careers4u.live.
         </p>
 
         <h6 className="font-bold">Information We Collect:</h6>
 
         <p className="w-1/2">
-          When you visit InternBurner.com or use any of our services, we may
+          When you visit Careers4u.live or use any of our services, we may
           collect personal identification information from you in various ways,
           including but not limited to when you register on our site, subscribe
           to our newsletter, fill out a form, or interact with other activities,
