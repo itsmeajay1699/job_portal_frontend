@@ -28,6 +28,7 @@ const InternshipContainer = ({
           key={internship.companyName}
           className="grid grid-row-4 rounded-lg shadow-lg bg-white px-2 py-2"
         >
+          {/* </div> */}
           <div className="mb-2">
             {/* <div className="flex items-center space-x-2"> */}
             <div className="relative aspect-[3/2]  rounded-md max-h-[100%]">
@@ -37,7 +38,6 @@ const InternshipContainer = ({
                 className="rounded-md object-center"
                 fill
               />
-              {/* </div> */}
             </div>
             <div className="flex flex-col mt-2">
               <h3 className="text-sm font-bold">
@@ -64,26 +64,22 @@ const InternshipContainer = ({
           </div>
           <Link
             href={{
-              pathname: `/job-description/${
-                (internship as InternshipApiData).internshipTitle ||
-                (internship as JobApiData).jobTitle
-              }`,
+              pathname: `/job-description/${internship.category.categoryName}/${internship._id}`,
               query: {
-                companyName: internship.companyName,
-                companyLogo: internship.companyLogo,
-                internshipLocation:
-                  (internship as InternshipApiData).internshipLocation ||
-                  (internship as JobApiData).jobLocation,
-                stipend:
-                  (internship as InternshipApiData).stipend ||
-                  (internship as JobApiData).ctcTo,
-                internshipTitle:
-                  (internship as InternshipApiData).internshipTitle ||
-                  (internship as JobApiData).jobTitle,
-                hrName: internship.hrName,
-                hrContactNumber: internship.hrContactNumber,
+                // companyName: internship.companyName,
+                // companyLogo: internship.companyLogo,
+                // internshipLocation:
+                //   (internship as InternshipApiData).internshipLocation ||
+                //   (internship as JobApiData).jobLocation,
+                // stipend:
+                //   (internship as InternshipApiData).stipend ||
+                //   (internship as JobApiData).ctcTo,
+                // internshipTitle:
+                //   (internship as InternshipApiData).internshipTitle ||
+                //   (internship as JobApiData).jobTitle,
+                // hrName: internship.hrName,
+                // hrContactNumber: internship.hrContactNumber,
                 categoryId: internship.category._id,
-                categoryName: internship.category.categoryName,
                 internship: Internship,
               },
             }}

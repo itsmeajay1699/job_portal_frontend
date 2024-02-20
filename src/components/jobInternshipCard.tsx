@@ -8,10 +8,9 @@ const JobdataCard = ({
   data,
   internship,
 }: {
-  data: InternshipApiData | JobApiData;
+  data: InternshipApiData | JobApiData | any;
   internship: boolean;
 }) => {
-  console.log(data as InternshipApiData);
   return (
     <div className="w-full grid gap-2">
       {/* img */}
@@ -32,26 +31,22 @@ const JobdataCard = ({
       </div>
       <Link
         href={{
-          pathname: `/job-description/${
-            (data as InternshipApiData).internshipLocation ||
-            (data as JobApiData).jobTitle
-          }`,
+          pathname: `/job-description/${data.category.categoryName}/${data._id}`,
           query: {
-            companyName: data.companyName,
-            companyLogo: data.companyLogo,
-            dataLocation:
-              (data as InternshipApiData).internshipLocation ||
-              (data as JobApiData).jobLocation,
-            stipend:
-              (data as InternshipApiData).stipend || (data as JobApiData).ctcTo,
-            dataTitle:
-              (data as InternshipApiData).internshipLocation ||
-              (data as JobApiData).jobTitle,
-            hrName: data.hrName,
-            hrContactNumber: data.hrContactNumber,
+            // companyName: data.companyName,
+            // companyLogo: data.companyLogo,
+            // dataLocation:
+            //   (data as InternshipApiData).internshipLocation ||
+            //   (data as JobApiData).jobLocation,
+            // stipend:
+            //   (data as InternshipApiData).stipend || (data as JobApiData).ctcTo,
+            // dataTitle:
+            //   (data as InternshipApiData).internshipLocation ||
+            //   (data as JobApiData).jobTitle,
+            // hrName: data.hrName,
+            // hrContactNumber: data.hrContactNumber,
             categoryId: data.category._id,
-            categoryName: data.category.categoryName,
-            internship: internship,
+            internship: data.jobTitle ? false : true,
           },
         }}
         className={buttonVariants({
@@ -59,7 +54,7 @@ const JobdataCard = ({
           className: "w-full mt-auto",
         })}
       >
-        View Details
+        View Details hello
       </Link>
     </div>
   );

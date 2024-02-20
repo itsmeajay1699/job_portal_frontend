@@ -5,6 +5,9 @@ type Category = {
 };
 
 export interface InternshipApiData {
+  job: any;
+  _id: string;
+  internship: InternshipApiData;
   companyName: string;
   companyLogo: string;
   internshipTitle: string;
@@ -20,6 +23,8 @@ export interface InternshipApiData {
 }
 
 export interface JobApiData {
+  job: any;
+  _id: string;
   companyName: string;
   companyLogo: string;
   jobTitle: string;

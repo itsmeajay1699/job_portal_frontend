@@ -28,6 +28,6 @@ export async function axiosReq<TData>(
     return data;
   } catch (error) {
     console.log(error);
-    throw new Error("Failed to fetch videos...");
+    throw new Error("Error fetching data");
   }
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "./ui/tabs";
 import { Button } from "./ui/button";
 import TabsContainer from "./TabContainer";
@@ -9,6 +9,7 @@ import { Filter } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FilterData, FILTERDATA } from "@/lib/internvalidators";
+import axios from "axios";
 
 type filtertype = "internship" | "job";
 
@@ -65,17 +66,25 @@ const FilterContainer = ({
   //   resolver: zodResolver(FilterData),
   // });
 
-  const updateStipend = (currStipend: any) => {
-    setStipend(currStipend);
-  };
+  const [allCategories, setAllCategories] = useState<any>([]);
 
-  const onSubmit = (data: FILTERDATA) => {
-    console.log(data);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL_DEV}/category`
+        );
 
-  const updateSalary = (currSalary: any) => {
-    setSalary(currSalary);
-  };
+        setAllCategories(response.data.data.category);
+        console.log("allCategories", allCategories);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="bg-primary py-6 rounded-md shadow-md">
       <div className="flex justify-center text-[#F8FAFC] lg:text-4xl  md:text-3xl  sm:text-2xl  text-3xl">
@@ -113,75 +122,23 @@ const FilterContainer = ({
         </select>
       </div>
 
-      {/* <div className="mt-2 mb-2 mx-5">
-        <Label className="text-[#F8FAFC] text-lg" htmlFor="Job Title">
-          Job Title:{" "}
-        </Label>
-        <select
-          onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-2 rounded-lg"
-        >
-          {jobTitles.map((val, index) => (
-            <option key={index} value={val}>
-              {val}
-            </option>
-          ))}
-        </select>
-      </div> */}
-
       <div className="mt-5 mb-5 mx-5">
         <Label className="text-[#F8FAFC] text-lg" htmlFor="Category">
           Category:{" "}
         </Label>
         <select
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) => {
+            setCategory(e.target.value);
+          }}
           className="w-full p-2 rounded-lg"
         >
-          {categories.map((val, index) => (
-            <option key={index} value={val}>
-              {val}
+          {allCategories?.map((val: any, index: number) => (
+            <option key={val._id} value={val.categoryName}>
+              {val.categoryName}
             </option>
           ))}
         </select>
       </div>
-
-      {/* <div className="mt-5 mb-5 mx-5 md:mx-1.5">
-        {isIntern ? (
-          <div className="flex justify-between mx-5 gap-3 items-center">
-            <Label className="text-[#F8FAFC] text-md" htmlFor="Stipend">
-              Stipend:
-            </Label>
-            <input
-              className="mt-1 w-full flex-1"
-              type="range"
-              min={0}
-              max={100}
-              step={5}
-              defaultValue={0}
-              onChange={(e) => setStipend(e.target.value)}
-
-              // onChange={(e) => updateStipend(e.target.value)}
-            />
-            <p className="text-sm ml-2 text-[#F8FAFC]">{stipend} K/month</p>
-          </div>
-        ) : (
-          <div className="flex justify-between mx-5 gap-3 items-center">
-            <Label className="text-[#F8FAFC] text-md" htmlFor="Salary">
-              Salary:
-            </Label>
-            <input
-              type="range"
-              min={0}
-              max={150}
-              className="mt-1 flex-1"
-              step={5}
-              defaultValue={0}
-              onChange={(e) => setSalary(e.target.value)}
-            />
-            <p className="text-[#F8FAFC] text-sm">{salary} LPA</p>
-          </div>
-        )}
-      </div> */}
     </div>
   );
 };

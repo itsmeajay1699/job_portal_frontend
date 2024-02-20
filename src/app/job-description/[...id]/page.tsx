@@ -3,47 +3,65 @@ import SinglePageSideBar from "@/components/SinglePageSideBar";
 import { Button } from "@/components/ui/button";
 import { InternshipApiData, JobApiData } from "@/interface";
 import { axiosReq } from "@/lib/api";
+import { CookingPot } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
 const JobDescription = async ({
   searchParams,
+  params,
 }: {
   searchParams: {
-    companyName: string;
-    companyLogo: string;
-    internshipLocation: string;
-    stipend: string;
-    internshipTitle: string;
-    hrName: string;
-    hrContactNumber: string;
+    // companyName: string;
+    // companyLogo: string;
+    // internshipLocation: string;
+    // stipend: string;
+    // internshipTitle: string;
+    // hrName: string;
+    // hrContactNumber: string;
     categoryId: string;
-    categoryName: string;
     internship: string;
   };
+  params: any;
 }) => {
+  const { id } = params;
+  const singleId = id[1];
+
   let res: (InternshipApiData | JobApiData)[] | any = [];
+  let internshipObj: InternshipApiData | any = {};
   if (searchParams.internship === "true") {
     try {
-      console.log(searchParams.internship);
       res = await axiosReq<InternshipApiData[]>({
         url: `/category/internship/${searchParams.categoryId}`,
         method: "GET",
       });
+
+      const res2 = await axiosReq<InternshipApiData>({
+        url: `/internship/single/${singleId}`,
+        method: "GET",
+      });
+      internshipObj = res2.data.internship;
     } catch (e) {
       console.log(e);
     }
   } else {
     try {
       console.log(searchParams.categoryId);
-      res = await axiosReq<InternshipApiData[]>({
+      res = await axiosReq<JobApiData[]>({
         url: `/category/job/${searchParams.categoryId}`,
         method: "GET",
       });
+      const res2 = await axiosReq<JobApiData>({
+        url: `/job/single/${singleId}`,
+        method: "GET",
+      });
+      internshipObj = res2.data.job;
     } catch (e) {
       console.log(e);
     }
   }
+
+  console.log(searchParams.internship);
 
   return (
     <div className="bg-muted py-8 px-6 sm:px-0">
@@ -51,48 +69,45 @@ const JobDescription = async ({
         <div className="flex  sm:flex-row flex-col-reverse gap-6">
           <div className="w-full md:w-1/4 min-w-[280px]">
             <SinglePageSideBar
-              internship={Boolean(searchParams.internship)}
+              internship={false}
               data={res}
               className="grid-cols-2 sm:grid-cols-1 gap-6"
             />
           </div>
-          <div className="grid justify-center items-start self-start gap-4">
+          <div className="grid items-start self-start gap-4 flex-1">
             {/* img section */}
             <div className="w-full flex flex-col items-start">
               <div className="relative w-1/2 min-w-[300px]  h-64 border border-red ">
                 <Image
-                  src={searchParams.companyLogo}
-                  alt={searchParams.companyName}
+                  src={internshipObj.companyLogo}
+                  alt={internshipObj.companyName}
                   className="rounded-md object-center"
                   fill
                 />
               </div>
               <span className="text-md font-bold text-center mt-2">
-                {searchParams.companyName}
+                {internshipObj.companyName}
               </span>
             </div>
 
             {/* job details */}
             <div className="w-full flex flex-col items-start max-w-[800px]  ">
               <h1 className="text-2xl font-bold">
-                {searchParams.internshipTitle}
+                {internshipObj.internshipTitle || internshipObj.jobTitle}
               </h1>
               <div className="flex flex-row items-center">
                 <span className="text-md font-bold">
-                  {searchParams.internshipLocation}
+                  {internshipObj.internshipLocation?.join(", ") ||
+                    internshipObj.jobLocation?.join(", ")}
                 </span>
                 <span className="text-md font-bold mx-4">|</span>
                 <span className="text-md font-bold">
-                  {searchParams.stipend}
+                  {internshipObj.stipend || internshipObj.ctcTo}
                 </span>
               </div>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde
-                odit enim adipisci iste quisquam, a sunt neque deleniti fugiat
-                hic corporis quos aspernatur iure numquam provident accusantium
-                praesentium omnis earum? Atque accusamus quis aliquam laborum
-                odit, obcaecati, praesentium hic dolorum illo doloremque ea
-                aspernatur. Illo facere in quis. Rerum, alias?
+                <span className="font-bold">Qualification: </span>
+                {internshipObj.qualification?.join(", ")}
               </p>
             </div>
 

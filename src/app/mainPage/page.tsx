@@ -56,8 +56,6 @@ const Page = ({
     if (isIntern) {
       delete filterObject.salary;
 
-      console.log("filterObject", filterObject)
-
       const fetchInternship = async () => {
         try {
           const res = await axios.get(
@@ -100,9 +98,9 @@ const Page = ({
 
   return (
     <section className="bg-muted py-8">
-      <MaxWidthWrapper className="max-w-[95rem]">
-        <div className="md:grid grid-cols-2 lg:grid-cols-5 xl:grid-cols-4 gap-4">
-          <div className="hidden md:block lg:col-span-2 xl:col-span-1">
+      <MaxWidthWrapper className="max-w-[2000px]">
+        <div className="md:grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          <div className="hidden md:block md:col-span-1 lg:col-span-1 xl:col-span-1">
             <ResponsiveFilterComponent
               setLocation={setLocation}
               setCategory={setCategory}
@@ -129,7 +127,7 @@ const Page = ({
             />
           </div>
 
-          <section className="bg-white p-4 rounded-md shadow-md col-span-1 lg:col-span-3">
+          <section className="bg-white p-4 rounded-md shadow-md md:col-span-2 col-span-1 lg:col-span-3 xl:col-span-4">
             <h1 className="text-xl font-bold">Suggested Internship</h1>
             {/* here will i show the resulted internship and job */}
             <div className="">
@@ -138,7 +136,7 @@ const Page = ({
                   data={internship}
                   Internship={true}
                   Job={false}
-                  className="lg:grid-cols-2 md:grid-cols-1 xl:grid-cols-3"
+                  className="lg:grid-cols-3 md:grid-cols-2 xl:grid-cols-4"
                 />
               ) : (
                 <InternshipContainer
