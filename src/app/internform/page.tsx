@@ -10,7 +10,8 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { all } from "axios";
-import zod from "zod";
+import { Toaster, toast } from "sonner";
+
 import {
   AuthCreadentialsValidate,
   TAUTHCREDENTIALVALIDATER,
@@ -22,7 +23,9 @@ const Page = () => {
   const {
     register,
     handleSubmit,
-    setValue,
+
+    reset,
+
     formState: { errors },
   } = useForm<TAUTHCREDENTIALVALIDATER>({
     resolver: zodResolver(AuthCreadentialsValidate),
@@ -36,6 +39,7 @@ const Page = () => {
   >([]);
   const [allCategories, setAllCategories] = useState<any>();
   const [categoryId, setCategoryId] = useState<string | null>();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,20 +58,34 @@ const Page = () => {
 
   const onSubmit = async (data: TAUTHCREDENTIALVALIDATER) => {
     try {
-      // console.log(data);
-      // console.log(internshipLocation);
-      // console.log(internshipQualification);
+      setIsLoaded(true);
       let newdata = {
         ...data,
         internshipLocation: [...internshipLocation],
         internshipQualification: [...internshipQualification],
         category: categoryId,
       };
+
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL_DEV}/internship`,
         newdata
       );
-    } catch (error) {}
+
+      reset();
+      setInternshipLocation([]);
+      setInternshipQualification([]);
+      setCategoryId(null);
+
+      toast.success("Internship Created Successfully", {
+        position: "top-right",
+      });
+    } catch (error) {
+      toast.error("Error Creating Internship", {
+        position: "top-right",
+      });
+    } finally {
+      setIsLoaded(false);
+    }
   };
 
   function setId(params: any) {
@@ -76,6 +94,7 @@ const Page = () => {
 
   return (
     <>
+      <Toaster richColors />
       <div className="relative flex pt-2 flex-col items-center justify-center lg:px-0 max-w-[800px] mx-auto px-4 sm:px-0">
         <div className="mx-auto flex w-full flex-col justify-center space-y-8 sw:w-[350px]">
           <div className="flex flex-col items-center space-y-2 text-center">
@@ -282,7 +301,9 @@ const Page = () => {
 
                 {/* created body ends here */}
               </div>
-              <Button className="w-full">Create Post</Button>
+              <Button disabled={isLoaded} className="w-full">
+                Create Post
+              </Button>
             </form>
           </div>
         </div>
