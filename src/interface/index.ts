@@ -5,6 +5,7 @@ type Category = {
 };
 
 export interface InternshipApiData {
+  createdAt: string | number | Date;
   job: any;
   _id: string;
   internship: InternshipApiData;
@@ -23,6 +24,8 @@ export interface InternshipApiData {
 }
 
 export interface JobApiData {
+  categoryName: any;
+  createdAt: string | number | Date;
   job: any;
   _id: string;
   companyName: string;
@@ -39,4 +42,3 @@ export interface JobApiData {
   hrEmail?: string;
   category: Category;
 }
-
