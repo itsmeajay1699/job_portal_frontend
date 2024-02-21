@@ -1,12 +1,19 @@
 "use client";
 import React, { use, useEffect, useState } from "react";
-// import FilterContainer from '@/components/FilterContainer';
 import ResponsiveFilterComponent from "@/components/ResponsiveFilterComponent";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import axios from "axios";
 import InternshipContainer from "@/components/InternshipContainer";
 import { InternshipApiData, JobApiData } from "@/interface";
 import MobileFilter from "@/components/MobileFilter";
+import {
+  Pagination, PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 type filterObjectType = {
   location: string | null;
@@ -32,6 +39,33 @@ const Page = ({
 
   let searchCategory = searchParams.category;
 
+  // State to track the current page
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages,setTotalPages] = useState<number>(1);
+
+  // Function to handle pagination
+  const handlePagination = (page: number) => {
+    setCurrentPage(page);
+  };
+  
+
+  // Generate pagination links dynamically
+  const paginationLinks = [];
+  for (let p = 1; p <= 5; p++) {
+    paginationLinks.push(
+      <PaginationItem key={p}>
+        <PaginationLink
+          href="#"
+          isActive={currentPage === p}
+          onClick={() => handlePagination(p)}
+        >
+          {p}
+        </PaginationLink>
+      </PaginationItem>
+    );
+  }
+
+
   useEffect(() => {
     console.log("searchParams", searchParams);
     const filterObject: any = {};
@@ -52,6 +86,7 @@ const Page = ({
     if (salary) {
       filterObject.salary = salary;
     }
+    filterObject.page = currentPage;
 
     if (isIntern) {
       delete filterObject.salary;
@@ -96,7 +131,9 @@ const Page = ({
       setInternship([]);
       setJob([]);
     };
-  }, [location, category, stipend, salary, isIntern, category]);
+  }, [location, category, stipend, salary, isIntern, category,currentPage]);
+
+  
 
   return (
     <section className="bg-muted py-8">
@@ -152,6 +189,30 @@ const Page = ({
           </section>
         </div>
       </MaxWidthWrapper>
+      <div className=" m-8">
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href="#"
+                onClick={() =>
+                  currentPage > 1 && handlePagination(currentPage - 1)
+                }
+              />
+            </PaginationItem>
+            {paginationLinks}
+            <PaginationItem>
+              <PaginationNext
+                href="#"
+                onClick={() =>
+                  currentPage < 5 && handlePagination(currentPage + 1)
+                }
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
+
     </section>
   );
 };
