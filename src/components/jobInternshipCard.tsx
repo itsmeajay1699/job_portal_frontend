@@ -54,7 +54,7 @@ const JobdataCard = ({
           className: "w-full mt-auto",
         })}
       >
-        View Details hello
+        View Details
       </Link>
     </div>
   );

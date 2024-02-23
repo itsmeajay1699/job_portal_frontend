@@ -1,4 +1,5 @@
 import { Internship } from "@/app/page";
+import { Building2, MapPin, Banknote } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Button, buttonVariants } from "./ui/button";
@@ -18,6 +19,7 @@ const InternshipContainer = ({
   className?: string;
 }) => {
   console.log(data);
+
   return (
     <div
       className={cn(
@@ -41,24 +43,38 @@ const InternshipContainer = ({
               />
             </div>
             <div className="flex flex-col mt-2">
-              <h3 className="text-sm font-bold">
-                {(internship as InternshipApiData).companyName}
-              </h3>
-              <p className="text-sm">
+              <div className=" flex flex-row">
+                <Building2 className=" mr-2" />
+                <span className=" text-base font-bold">
+                  {(internship as InternshipApiData).companyName}
+                </span>
+              </div>
+              {/* <p className="text-sm">
                 {(internship as InternshipApiData).internshipTitle ||
                   (internship as JobApiData).jobTitle}
-              </p>
+              </p> */}
             </div>
             <div className="">
               <div>
-                <p className="font-semibold text-lg">
+                <p className="text-base font-semibold">
                   {(internship as InternshipApiData).internshipTitle ||
                     (internship as JobApiData).jobTitle}
                 </p>
-                <p className="text-sm">
+                <span className="text-base font-semibold">
+                  {Internship ? "Stipend : " : "CTC : "}
+                </span>
+                <span className="text-base">
                   {(internship as InternshipApiData).stipend ||
-                    (internship as JobApiData).ctcTo}
-                </p>
+                    (internship as JobApiData).salary}
+                </span>
+                <br></br>
+                <span className=" font-semibold text-base">Location : </span>
+                  {(internship as InternshipApiData).internshipLocation?.map((l) => (
+                    <span className=" text-base" key={l}>{`${l} `}</span>
+                  )) || (internship as JobApiData).jobLocation?.map((l) => (
+                    <span className=" text-base" key={l}>{`${l} `}</span>
+                  ))}
+
               </div>
               <hr className="my-1" />
             </div>
