@@ -7,7 +7,8 @@ import InternshipContainer from "@/components/InternshipContainer";
 import { InternshipApiData, JobApiData } from "@/interface";
 import MobileFilter from "@/components/MobileFilter";
 import {
-  Pagination, PaginationContent,
+  Pagination,
+  PaginationContent,
   PaginationEllipsis,
   PaginationItem,
   PaginationLink,
@@ -41,30 +42,14 @@ const Page = ({
 
   // State to track the current page
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPages,setTotalPages] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
 
   // Function to handle pagination
   const handlePagination = (page: number) => {
     setCurrentPage(page);
   };
-  
 
   // Generate pagination links dynamically
-  const paginationLinks = [];
-  for (let p = 1; p <= 5; p++) {
-    paginationLinks.push(
-      <PaginationItem key={p}>
-        <PaginationLink
-          href="#"
-          isActive={currentPage === p}
-          onClick={() => handlePagination(p)}
-        >
-          {p}
-        </PaginationLink>
-      </PaginationItem>
-    );
-  }
-
 
   useEffect(() => {
     console.log("searchParams", searchParams);
@@ -129,9 +114,44 @@ const Page = ({
       setInternship([]);
       setJob([]);
     };
-  }, [location, category, stipend, salary, isIntern, category,currentPage]);
+  }, [location, category, stipend, salary, isIntern, category, currentPage]);
 
-  
+  const [totalPage, setTotalPage] = useState<number>(1);
+
+  useEffect(() => {
+    try {
+      if (isIntern) {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_API_URL_DEV}/internship/count`)
+          .then((res) => {
+            setTotalPage(res.data.totalPage);
+          });
+      } else {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_API_URL_DEV}/job/count`)
+          .then((res) => {
+            setTotalPage(res.data.totalPage);
+          });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  const paginationLinks = [];
+  for (let p = 1; p <= totalPage; p++) {
+    paginationLinks.push(
+      <PaginationItem key={p}>
+        <PaginationLink
+          href="#"
+          isActive={currentPage === p}
+          onClick={() => handlePagination(p)}
+        >
+          {p}
+        </PaginationLink>
+      </PaginationItem>
+    );
+  }
 
   return (
     <section className="bg-muted py-8">
@@ -203,14 +223,13 @@ const Page = ({
               <PaginationNext
                 href="#"
                 onClick={() =>
-                  currentPage < 5 && handlePagination(currentPage + 1)
+                  currentPage < totalPage && handlePagination(currentPage + 1)
                 }
               />
             </PaginationItem>
           </PaginationContent>
         </Pagination>
       </div>
-
     </section>
   );
 };
