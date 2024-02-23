@@ -17,6 +17,7 @@ const InternshipContainer = ({
   Job?: boolean;
   className?: string;
 }) => {
+  console.log(data);
   return (
     <div
       className={cn(
