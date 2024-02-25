@@ -8,6 +8,55 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: {
+    id: string;
+    internship: boolean;
+  };
+  searchParams: {
+    categoryId: string;
+    internship: string;
+  };
+}) {
+  try {
+    console.log(params, searchParams);
+    const { id } = params;
+    const singleId = id[1];
+    if (searchParams.internship) {
+      const res = await axiosReq<InternshipApiData>({
+        url: `/internship/single/${singleId}`,
+        method: "GET",
+      });
+      const internshipObj = res.data.internship;
+      return {
+        title: `${internshipObj.internshipTitle} | ${internshipObj.companyName}`,
+        description: internshipObj.internshipDescription,
+        alternates: {
+          canonical: `https://careers4u.live/internship/${internshipObj.category.categoryName}/${singleId}`,
+        },
+      };
+    } else {
+      const res = await axiosReq<JobApiData>({
+        url: `/job/single/${singleId}`,
+        method: "GET",
+      });
+      const internshipObj = res.data.job;
+      return {
+        title: `${internshipObj.jobTitle} | ${internshipObj.companyName}`,
+        description: internshipObj.jobDescription,
+        alternates: {
+          canonical: `https://careers4u.live/job/${internshipObj.category.categoryName}/${singleId}`,
+        },
+      };
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 const JobDescription = async ({
   searchParams,
   params,
@@ -27,7 +76,6 @@ const JobDescription = async ({
 }) => {
   const { id } = params;
   const singleId = id[1];
-
   let res: (InternshipApiData | JobApiData)[] | any = [];
   let internshipObj: InternshipApiData | any = {};
   if (searchParams.internship === "true") {

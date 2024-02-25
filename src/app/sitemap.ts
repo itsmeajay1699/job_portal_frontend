@@ -2,7 +2,7 @@ import { InternshipApiData, JobApiData } from "@/interface";
 import { axiosReq } from "@/lib/api";
 
 export default async function sitemap() {
-  //   const metaData = await getSiteMetaData();
+  const baseUrl = "https://careers4u.live";
 
   const res: any = await axiosReq<InternshipApiData[]>({
     url: "/internship",
@@ -14,41 +14,47 @@ export default async function sitemap() {
     method: "GET",
   });
 
-  const internshipUrls = res.data?.internship.map(
-    (internship: InternshipApiData) => {
+  const internshipUrls =
+    res.data?.internship.map((internship: InternshipApiData) => {
       return {
-        url: `/internship/${internship.category.categoryName}/${internship._id}`,
-        // lastModified: new Date(internship.createdAt),
+        url: `/job-description/${internship.category.categoryName}/${internship._id}?categoryId=${internship.category._id}&amp;internship=true`,
+        lastModified: new Date(internship.createdAt),
       };
-    }
-  );
+    }) ?? [];
 
-  const jobUrls = jobData.data?.job.map((job: JobApiData) => {
-    return {
-      url: `/job/${job.category.categoryName}/${job._id}`,
-      //   lastModified: new Date(job.createdAt),
-    };
-  });
+  const jobUrls =
+    jobData.data?.job.map((job: JobApiData) => {
+      return {
+        url: `/job-description/${job.category.categoryName}/${job._id}?categoryId=${job.category._id}&amp;internship=false`,
+        lastModified: new Date(job.createdAt),
+      };
+    }) ?? [];
 
   return [
     {
-      url: "/",
+      url: baseUrl,
+      lastModified: new Date(),
     },
     {
       url: "/about",
+      lastModified: new Date(),
     },
     {
       url: "/contact-us",
+      lastModified: new Date(),
     },
 
     {
       url: "/privacy-policy",
+      lastModified: new Date(),
     },
     {
       url: "/mainPage",
+      lastModified: new Date(),
     },
     {
       url: "/disclaimer",
+      lastModified: new Date(),
     },
 
     ...internshipUrls,

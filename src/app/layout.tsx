@@ -8,7 +8,10 @@ import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Careers4u | Find your dream job and internships",
+  title: {
+    default: "Careers4u | Find your dream job and internships",
+    template: `%s | Careers4u`,
+  },
   description:
     "careers4u.live is a platform that helps students to find their dream job and internships.",
 };
