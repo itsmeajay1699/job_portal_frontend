@@ -20,7 +20,7 @@ export default async function sitemap() {
       console.log("Internship createdAt:", internship.createdAt);
 
       return {
-        url: `/job-description/${internship.category.categoryName}/${internship._id}?categoryId=${internship.category._id}&amp;internship=true`,
+        url: `${baseUrl}/job-description/${internship.category.categoryName}/${internship._id}?categoryId=${internship.category._id}&amp;internship=true`,
         lastModified: new Date(internship.createdAt || new Date()),
       };
     }) ?? [];
@@ -28,7 +28,7 @@ export default async function sitemap() {
   const jobUrls =
     jobData.data?.job.map((job: JobApiData) => {
       return {
-        url: `/job-description/${job?.category?.categoryName}/${job?._id}?categoryId=${job?.category._id}&amp;internship=false`,
+        url: `${baseUrl}/job-description/${job?.category?.categoryName}/${job?._id}?categoryId=${job?.category._id}&amp;internship=false`,
         lastModified: new Date(job?.createdAt || new Date()),
       };
     }) ?? [];
@@ -39,27 +39,25 @@ export default async function sitemap() {
       lastModified: new Date(),
     },
     {
-      url: "/about",
+      url: `${baseUrl}/about`,
       lastModified: new Date(),
     },
     {
-      url: "/contact-us",
-      lastModified: new Date(),
-    },
-
-    {
-      url: "/privacy-policy",
+      url: `${baseUrl}/contact-us`,
       lastModified: new Date(),
     },
     {
-      url: "/mainPage",
+      url: `${baseUrl}/privacy-policy`,
       lastModified: new Date(),
     },
     {
-      url: "/disclaimer",
+      url: `${baseUrl}/mainPage`,
       lastModified: new Date(),
     },
-
+    {
+      url: `${baseUrl}/disclaimer`,
+      lastModified: new Date(),
+    },
     ...internshipUrls,
     ...jobUrls,
   ];
