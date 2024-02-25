@@ -35,8 +35,7 @@ export interface JobApiData {
   jobLocation: string[];
   qualification?: string[];
   applyLink: string;
-  ctcTo: string;
-  ctcFrom: string;
+  salary: string;
   hrName?: string;
   hrContactNumber?: string;
   hrEmail?: string;

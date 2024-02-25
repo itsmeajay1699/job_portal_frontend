@@ -138,7 +138,7 @@ const Page = ({
     } catch (err) {
       console.log(err);
     }
-  }, []);
+  }, [isIntern]);
 
   const paginationLinks = [];
   for (let p = 1; p <= totalPage; p++) {
