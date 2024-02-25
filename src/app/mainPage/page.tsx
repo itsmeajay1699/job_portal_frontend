@@ -202,7 +202,7 @@ const Page = ({
                   data={job}
                   Internship={false}
                   Job={true}
-                  className="lg:grid-cols-3 md:grid-cols-2"
+                  className="lg:grid-cols-3 md:grid-cols-2 xl:grid-cols-4"
                 />
               )}
             </div>
