@@ -92,39 +92,44 @@ const JobDescription = async ({
                 {internshipObj.internshipTitle || internshipObj.jobTitle}
               </h1>
               <div className=" flex flex-row">
-              <Building2 className=" mr-2"/>
-              <span className=" text-lg">{internshipObj.companyName}</span>
-              <span className="text-lg font-semibold mx-2">|</span>
-              <MapPin className=" mr-1"/>
-              <span className="text-lg">
+                <Building2 className=" mr-2" />
+                <span className=" text-lg">{internshipObj.companyName}</span>
+                <span className="text-lg font-semibold mx-2">|</span>
+                <MapPin className=" mr-1" />
+                <span className="text-lg">
                   {internshipObj.internshipLocation?.join(", ") ||
                     internshipObj.jobLocation?.join(", ")}
                 </span>
               </div>
               <div className="flex flex-row text-lg">
-                <span className="font-semibold mr-2">{searchParams.internship==="true"?"Stipend : ":"Salary : "}</span>
-                <span>
-                  {internshipObj.stipend || internshipObj.salary}
+                <span className="font-semibold mr-2">
+                  {searchParams.internship === "true"
+                    ? "Stipend : "
+                    : "Salary : "}
                 </span>
+                <span>{internshipObj.stipend || internshipObj.salary}</span>
               </div>
               <div>
                 <span className="font-semibold text-lg">Qualification: </span>
                 <ul className=" list-disc pl-5">
-                  {internshipObj.internshipQualification?.map((q:string)=>(
-                    <li>{q}</li>
-                  ))
-                  ||
-                  internshipObj.jobQualification?.map((q:string)=>(
-                    <li>{q}</li>
-                  ))
-                  }
+                  {internshipObj.internshipQualification?.map((q: string) => (
+                    <li key={q}>{q}</li>
+                  )) ||
+                    internshipObj.jobQualification?.map((q: string) => (
+                      <li key={q}>{q}</li>
+                    ))}
                 </ul>
               </div>
 
               <div>
-                <p className=" text-lg font-semibold">{internshipObj.internship==="true"?"Intership Description: ":"Job Description: "}</p>
+                <p className=" text-lg font-semibold">
+                  {internshipObj.internship === "true"
+                    ? "Intership Description: "
+                    : "Job Description: "}
+                </p>
                 <p>
-                  {internshipObj.internshipDescription || internshipObj.jobDescription}
+                  {internshipObj.internshipDescription ||
+                    internshipObj.jobDescription}
                 </p>
               </div>
             </div>
