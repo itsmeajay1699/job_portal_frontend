@@ -3,7 +3,7 @@ import SinglePageSideBar from "@/components/SinglePageSideBar";
 import { Button } from "@/components/ui/button";
 import { InternshipApiData, JobApiData } from "@/interface";
 import { axiosReq } from "@/lib/api";
-import { CookingPot } from "lucide-react";
+import { Building2, MapPin } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -85,30 +85,49 @@ const JobDescription = async ({
                   fill
                 />
               </div>
-              <span className="text-md font-bold text-center mt-2">
-                {internshipObj.companyName}
-              </span>
             </div>
 
             {/* job details */}
-            <div className="w-full flex flex-col items-start max-w-[800px]  ">
+            <div className="w-full flex flex-col gap-2 items-start max-w-[800px]  ">
               <h1 className="text-2xl font-bold">
                 {internshipObj.internshipTitle || internshipObj.jobTitle}
               </h1>
-              <div className="flex flex-row items-center">
-                <span className="text-md font-bold">
+              <div className=" flex flex-row">
+              <Building2 className=" mr-2"/>
+              <span className=" text-lg">{internshipObj.companyName}</span>
+              <span className="text-lg font-semibold mx-2">|</span>
+              <MapPin className=" mr-1"/>
+              <span className="text-lg">
                   {internshipObj.internshipLocation?.join(", ") ||
                     internshipObj.jobLocation?.join(", ")}
                 </span>
-                <span className="text-md font-bold mx-4">|</span>
-                <span className="text-md font-bold">
-                  {internshipObj.stipend || internshipObj.ctcTo}
+              </div>
+              <div className="flex flex-row text-lg">
+                <span className="font-semibold mr-2">{searchParams.internship==="true"?"Stipend : ":"Salary : "}</span>
+                <span>
+                  {internshipObj.stipend || internshipObj.salary}
                 </span>
               </div>
-              <p>
-                <span className="font-bold">Qualification: </span>
-                {internshipObj.qualification?.join(", ")}
-              </p>
+              <div>
+                <span className="font-semibold text-lg">Qualification: </span>
+                <ul className=" list-disc pl-5">
+                  {internshipObj.internshipQualification?.map((q:string)=>(
+                    <li>{q}</li>
+                  ))
+                  ||
+                  internshipObj.jobQualification?.map((q:string)=>(
+                    <li>{q}</li>
+                  ))
+                  }
+                </ul>
+              </div>
+
+              <div>
+                <p className=" text-lg font-semibold">{internshipObj.internship==="true"?"Intership Description: ":"Job Description: "}</p>
+                <p>
+                  {internshipObj.internshipDescription || internshipObj.jobDescription}
+                </p>
+              </div>
             </div>
 
             <div className="text-center">

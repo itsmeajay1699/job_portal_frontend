@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { buttonVariants } from "./ui/button";
-
+import { Building2 } from "lucide-react";
 const JobdataCard = ({
   data,
   internship,
@@ -22,13 +22,38 @@ const JobdataCard = ({
           fill
         />
       </div>
-      <div className="">
-        <h3 className="text-sm font-bold">{data.companyName}</h3>
-        <p className="text-sm">
-          {(data as InternshipApiData).internshipLocation ||
-            (data as JobApiData).jobTitle}
-        </p>
-      </div>
+      <div className="flex flex-col mt-2">
+              <div className=" flex flex-row">
+                <Building2 className=" mr-2" />
+                <span className=" text-base font-bold">
+                  {(data as InternshipApiData).companyName}
+                </span>
+              </div>
+            <div className="">
+              <div>
+                <p className="text-base font-semibold">
+                  {(data as InternshipApiData).internshipTitle ||
+                    (data as JobApiData).jobTitle}
+                </p>
+                <span className="text-base font-semibold">
+                  {internship ? "Stipend : " : "CTC : "}
+                </span>
+                <span className="text-base">
+                  {(data as InternshipApiData).stipend ||
+                    (data as JobApiData).salary}
+                </span>
+                <br></br>
+                <span className=" font-semibold text-base">Location : </span>
+                  {(data as InternshipApiData).internshipLocation?.map((l) => (
+                    <span className=" text-base" key={l}>{`${l} `}</span>
+                  )) || (data as JobApiData).jobLocation?.map((l) => (
+                    <span className=" text-base" key={l}>{`${l} `}</span>
+                  ))}
+
+              </div>
+              <hr className="my-1" />
+            </div>
+          </div>
       <Link
         href={{
           pathname: `/job-description/${data.category.categoryName}/${data._id}`,
@@ -54,7 +79,7 @@ const JobdataCard = ({
           className: "w-full mt-auto",
         })}
       >
-        View Details hello
+        View Details
       </Link>
     </div>
   );
