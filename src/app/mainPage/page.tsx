@@ -56,7 +56,7 @@ const Page = ({
     const filterObject: any = {};
 
     if (searchCategory) {
-      setCategory(searchCategory);
+      filterObject.category = searchCategory;
     }
 
     if (location) {
@@ -75,6 +75,8 @@ const Page = ({
 
     if (isIntern) {
       delete filterObject.salary;
+
+      console.log("filterObject", filterObject);
 
       const fetchInternship = async () => {
         try {

@@ -2,6 +2,7 @@
 import React, { useRef } from "react";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { Cross, XCircle } from "lucide-react";
 
 interface InputArrayTypeProps {
   items: string[];
@@ -48,8 +49,20 @@ const InputArrayType = (props: InputArrayTypeProps) => {
       <div className="flex gap-2">
         <div className="flex">
           {props.items.map((item, index) => (
-            <div key={index} className="bg-gray-200 p-2 m-1 rounded-md">
+            <div
+              key={index}
+              className="bg-gray-200 p-2 m-1 rounded-md relative"
+            >
               {item}
+              <div
+                className="cursor-pointer absolute top-[-5px] right-[-5px]  w-5 h-5 bg-black text-white rounded-full flex items-center justify-center hover:bg-red-500 transition-colors duration-300"
+                onClick={() => {
+                  const newItems = props.items.filter((i) => i !== item);
+                  props.setItems(newItems);
+                }}
+              >
+                <XCircle className="w-5 h-5" />
+              </div>
             </div>
           ))}
         </div>

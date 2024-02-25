@@ -51,6 +51,8 @@ const Page = () => {
     fetchData();
   }, []);
 
+  let defaultCategoryId = allCategories?.data?.category[0]._id;
+
   const onSubmit = async (data: TAUTHCREDENTIALVALIDATER) => {
     try {
       setIsLoaded(true);
@@ -58,8 +60,9 @@ const Page = () => {
         ...data,
         jobLocation: [...jobLocation],
         jobQualification: [...jobQualification],
-        category: categoryId,
+        category: !categoryId ? defaultCategoryId : categoryId,
       };
+
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL_DEV}/job`,
         newdata
@@ -279,9 +282,6 @@ const Page = () => {
                       setCategoryId(selectedOptionId);
                     }}
                   >
-                    <option defaultValue="Select" disabled hidden>
-                      Select
-                    </option>
                     {allCategories?.data?.category.map((val: any) => (
                       <option id={val._id} key={val._id}>
                         {val.categoryName}
@@ -291,7 +291,6 @@ const Page = () => {
                 </div>
 
                 {/* created body ends here */}
-                 
               </div>
               <Button disabled={isLoaded} className="w-full">
                 Create Post

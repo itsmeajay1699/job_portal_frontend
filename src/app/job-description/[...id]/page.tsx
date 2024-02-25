@@ -1,10 +1,11 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import SinglePageSideBar from "@/components/SinglePageSideBar";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { InternshipApiData, JobApiData } from "@/interface";
 import { axiosReq } from "@/lib/api";
 import { CookingPot } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const JobDescription = async ({
@@ -61,8 +62,6 @@ const JobDescription = async ({
     }
   }
 
-  console.log(searchParams.internship);
-
   return (
     <div className="bg-muted py-8 px-6 sm:px-0">
       <MaxWidthWrapper>
@@ -112,7 +111,17 @@ const JobDescription = async ({
             </div>
 
             <div className="text-center">
-              <Button className="w-1/2 mt-4">Apply Now</Button>
+              {/* <Button className="w-1/2 mt-4">Apply Now</Button> */}
+              <Link
+                href={internshipObj.applyLink}
+                target="_blank"
+                className={buttonVariants({
+                  variant: "default",
+                  className: "w-1/2 mt-4",
+                })}
+              >
+                Apply Now
+              </Link>
             </div>
           </div>
         </div>

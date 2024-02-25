@@ -6,6 +6,12 @@ import React, { useEffect, useRef } from "react";
 import { buttonVariants } from "./ui/button";
 import Link from "next/link";
 import { useOnClickOutside } from "@/hooks/use-on-click-outside";
+import axios from "axios";
+
+type Category = {
+  categoryName: string;
+  _id: string;
+};
 
 const DropDownMenu = ({ categories }: { categories: string[] }) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -28,6 +34,24 @@ const DropDownMenu = ({ categories }: { categories: string[] }) => {
   useOnClickOutside(navRef, () => {
     setIsOpen(false);
   });
+
+  const [allCategories, setAllCategories] = React.useState<Category[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL_DEV}/category`
+        );
+
+        setAllCategories(response.data.data.category);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div ref={navRef} className="h-full">
@@ -62,14 +86,14 @@ const DropDownMenu = ({ categories }: { categories: string[] }) => {
           isOpen ? "block" : "hidden"
         )}
       >
-        {categories.map((category) => {
+        {allCategories?.map((category: Category) => {
           return (
             <Link
               href={{
                 pathname: "/mainPage",
-                query: { category: category },
+                query: { category: category.categoryName },
               }}
-              key={category}
+              key={category._id}
               onClick={() => setIsOpen(false)}
             >
               <div
@@ -78,9 +102,8 @@ const DropDownMenu = ({ categories }: { categories: string[] }) => {
                   "hover:bg-gray-100 hover:text-primary",
                   "transition-colors duration-300 rounded-sm"
                 )}
-                key={category}
               >
-                <span>{category}</span>
+                <span>{category.categoryName}</span>
               </div>
             </Link>
           );

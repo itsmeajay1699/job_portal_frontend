@@ -56,14 +56,15 @@ const Page = () => {
     fetchData();
   }, []);
 
+  let defaultCategory = allCategories?.data?.category[0]._id;
+
   const onSubmit = async (data: TAUTHCREDENTIALVALIDATER) => {
     try {
-      setIsLoaded(true);
       let newdata = {
         ...data,
         internshipLocation: [...internshipLocation],
         internshipQualification: [...internshipQualification],
-        category: categoryId,
+        category: !categoryId ? defaultCategory : categoryId,
       };
 
       const res = await axios.post(
@@ -288,9 +289,6 @@ const Page = () => {
                       setCategoryId(selectedOptionId);
                     }}
                   >
-                    <option defaultValue="Select" disabled hidden>
-                      Select
-                    </option>
                     {allCategories?.data?.category.map((val: any) => (
                       <option id={val._id} key={val._id}>
                         {val.categoryName}
