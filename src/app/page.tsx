@@ -180,10 +180,7 @@ export default async function Home() {
       <section className="border-t border-gray-200 bg-gray-50 bg-muted">
         <MaxWidthWrapper className="py-5">
           <div className="w-full">
-            <TabsContainer
-              job={jobData.data?.job}
-              interships={res.data?.internship}
-            />
+            <TabsContainer job={jobData?.job} interships={res?.internship} />
           </div>
         </MaxWidthWrapper>
       </section>
