@@ -10,7 +10,7 @@ export const AuthCreadentialsValidate = z.object({
   salary: z.string(),
   hrName: z.string().optional(),
   hrContactNumber: z.string().optional(),
-  hrEmail: z.string().email().optional(),
+  hrEmail: z.string().optional(),
 });
 
 export type TAUTHCREDENTIALVALIDATER = z.infer<typeof AuthCreadentialsValidate>;

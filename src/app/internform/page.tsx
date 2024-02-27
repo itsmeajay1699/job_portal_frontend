@@ -67,15 +67,15 @@ const Page = () => {
         category: !categoryId ? defaultCategory : categoryId,
       };
 
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL_DEV}/internship`,
-        newdata
-      );
+      // const res = await axios.post(
+      //   `${process.env.NEXT_PUBLIC_API_URL_DEV}/internship`,
+      //   newdata
+      // );
 
-      reset();
-      setInternshipLocation([]);
-      setInternshipQualification([]);
-      setCategoryId(null);
+      // reset();
+      // setInternshipLocation([]);
+      // setInternshipQualification([]);
+      // setCategoryId(null);
 
       toast.success("Internship Created Successfully", {
         position: "top-right",
