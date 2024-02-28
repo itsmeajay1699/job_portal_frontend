@@ -44,7 +44,10 @@ export async function axiosReq<TData>(
 
     const res = await data.json();
 
-    return res;
+    return {
+      data: res,
+      ...res,
+    };
   } catch (error) {
     console.log(error);
     throw new Error("Error fetching data");
