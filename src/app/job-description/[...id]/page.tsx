@@ -110,6 +110,8 @@ const JobDescription = async ({
     }
   }
 
+  console.log(res);
+
   return (
     <div className="bg-muted py-8 px-6 sm:px-0">
       <MaxWidthWrapper>
@@ -124,11 +126,11 @@ const JobDescription = async ({
           <div className="grid items-start self-start gap-4 flex-1">
             {/* img section */}
             <div className="w-full flex flex-col items-start">
-              <div className="relative w-1/2 min-w-[300px]  h-64 border border-red ">
+              <div className="relative w-1/3 min-w-[300px]  h-64 border border-red ">
                 <Image
                   src={internshipObj.companyLogo}
                   alt={internshipObj.companyName}
-                  className="rounded-md object-center"
+                  className="rounded-md object-contain"
                   fill
                 />
               </div>

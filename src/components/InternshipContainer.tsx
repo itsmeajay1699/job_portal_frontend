@@ -18,8 +18,6 @@ const InternshipContainer = ({
   Job?: boolean;
   className?: string;
 }) => {
-  console.log(data);
-
   return (
     <div
       className={cn(
@@ -38,7 +36,7 @@ const InternshipContainer = ({
               <Image
                 src={internship.companyLogo}
                 alt={internship.companyName}
-                className="rounded-md object-center"
+                className="rounded-md object-contain"
                 fill
               />
             </div>
@@ -69,12 +67,12 @@ const InternshipContainer = ({
                 </span>
                 <br></br>
                 <span className=" font-semibold text-base">Location : </span>
-                  {(internship as InternshipApiData).internshipLocation?.map((l) => (
-                    <span className=" text-base" key={l}>{`${l} `}</span>
-                  )) || (internship as JobApiData).jobLocation?.map((l) => (
+                {(internship as InternshipApiData).internshipLocation?.map(
+                  (l) => <span className=" text-base" key={l}>{`${l} `}</span>
+                ) ||
+                  (internship as JobApiData).jobLocation?.map((l) => (
                     <span className=" text-base" key={l}>{`${l} `}</span>
                   ))}
-
               </div>
               <hr className="my-1" />
             </div>

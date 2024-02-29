@@ -18,7 +18,7 @@ const JobdataCard = ({
         <Image
           src={data.companyLogo}
           alt={data.companyName}
-          className="rounded-md object-center max-h-[100%] w-full h-full"
+          className="rounded-md object-contain max-h-[100%] w-full h-full"
           fill
         />
       </div>

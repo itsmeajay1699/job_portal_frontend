@@ -12,13 +12,12 @@ const SinglePageSideBar = ({
   internship: boolean;
   className?: string;
 }) => {
-  console.log(data);
   return (
     <div className={cn("grid gap-6", className)}>
-      {data?.data?.data?.map((item: any) => (
+      {data?.data?.map((item: any) => (
         <div key={item._id}>
           <JobInternshipCard
-            internship={data.data.data[0].jobTitle ? false : true}
+            internship={data.data[0].jobTitle ? false : true}
             data={item}
           />
         </div>
