@@ -22,10 +22,10 @@ export async function generateMetadata({
   };
 }) {
   try {
-    console.log(params, searchParams);
     const { id } = params;
     const singleId = id[1];
-    if (searchParams.internship) {
+    console.log(searchParams.internship);
+    if (searchParams.internship === "true") {
       const res = await axiosReq<InternshipApiData>({
         url: `/internship/single/${singleId}`,
         method: "GET",
@@ -110,17 +110,15 @@ const JobDescription = async ({
     }
   }
 
-  console.log(res);
-
   return (
     <div className="bg-muted py-8 px-6 sm:px-0">
-      <MaxWidthWrapper>
-        <div className="flex  sm:flex-row flex-col-reverse gap-6">
+      <MaxWidthWrapper >
+        <div className="flex  md:flex-row flex-col-reverse gap-6">
           <div className="w-full md:w-1/4 min-w-[280px]">
             <SinglePageSideBar
               internship={false}
               data={res}
-              className="grid-cols-2 sm:grid-cols-1 gap-6"
+              className="grid-cols-2 sm:grid-cols-1 gap-4"
             />
           </div>
           <div className="grid items-start self-start gap-4 flex-1">

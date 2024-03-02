@@ -12,9 +12,8 @@ const JobdataCard = ({
   internship: boolean;
 }) => {
   return (
-    <div className="w-full grid gap-2">
-      {/* img */}
-      <div className="relative h-52 w-full">
+    <div className="w-full grid">
+      <div className="relative h-44 w-full">
         <Image
           src={data.companyLogo}
           alt={data.companyName}
@@ -23,37 +22,37 @@ const JobdataCard = ({
         />
       </div>
       <div className="flex flex-col mt-2">
-              <div className=" flex flex-row">
-                <Building2 className=" mr-2" />
-                <span className=" text-base font-bold">
-                  {(data as InternshipApiData).companyName}
-                </span>
-              </div>
-            <div className="">
-              <div>
-                <p className="text-base font-semibold">
-                  {(data as InternshipApiData).internshipTitle ||
-                    (data as JobApiData).jobTitle}
-                </p>
-                <span className="text-base font-semibold">
-                  {internship ? "Stipend : " : "CTC : "}
-                </span>
-                <span className="text-base">
-                  {(data as InternshipApiData).stipend ||
-                    (data as JobApiData).salary}
-                </span>
-                <br></br>
-                <span className=" font-semibold text-base">Location : </span>
-                  {(data as InternshipApiData).internshipLocation?.map((l) => (
-                    <span className=" text-base" key={l}>{`${l} `}</span>
-                  )) || (data as JobApiData).jobLocation?.map((l) => (
-                    <span className=" text-base" key={l}>{`${l} `}</span>
-                  ))}
-
-              </div>
-              <hr className="my-1" />
-            </div>
+        <div className=" flex flex-row">
+          <Building2 className=" mr-2" />
+          <span className=" text-base font-bold">
+            {(data as InternshipApiData).companyName}
+          </span>
+        </div>
+        <div className="">
+          <div>
+            <p className="text-base font-semibold">
+              {(data as InternshipApiData).internshipTitle ||
+                (data as JobApiData).jobTitle}
+            </p>
+            <span className="text-base font-semibold">
+              {internship ? "Stipend : " : "CTC : "}
+            </span>
+            <span className="text-base">
+              {(data as InternshipApiData).stipend ||
+                (data as JobApiData).salary}
+            </span>
+            <br></br>
+            <span className=" font-semibold text-base">Location : </span>
+            {(data as InternshipApiData).internshipLocation?.map((l) => (
+              <span className=" text-base" key={l}>{`${l} `}</span>
+            )) ||
+              (data as JobApiData).jobLocation?.map((l) => (
+                <span className=" text-base" key={l}>{`${l} `}</span>
+              ))}
           </div>
+          <hr className="my-1" />
+        </div>
+      </div>
       <Link
         href={{
           pathname: `/job-description/${data.category.categoryName}/${data._id}`,
