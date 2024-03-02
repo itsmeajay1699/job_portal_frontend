@@ -17,8 +17,6 @@ export default async function sitemap() {
 
   const internshipUrls =
     res.data?.internship.map((internship: InternshipApiData) => {
-      console.log("Internship createdAt:", internship.createdAt);
-
       return {
         url: `${baseUrl}/job-description/${internship.category.categoryName}/${internship._id}?categoryId=${internship.category._id}&amp;internship=true`,
         lastModified: new Date(internship.createdAt || new Date()),
