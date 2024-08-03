@@ -12,9 +12,9 @@ export default async function sitemap() {
 
   const jobData: any = await axiosReq<JobApiData[]>({
     url: "/job",
-    method: "GET",
+     method: "GET",
   });
-
+ 
   const internshipUrls =
     res.data?.internship.map((internship: InternshipApiData) => {
       return {
