@@ -142,15 +142,29 @@ const perks = [
 ];
 
 export default async function Home() {
-  const res: any = await axiosReq<InternshipApiData[]>({
-    url: "/internship",
-    method: "GET",
-  });
+  let res: InternshipApiData[] = [];
+  try {
+    res = (
+      await axiosReq<InternshipApiData[]>({
+        url: "/internship",
+        method: "GET",
+      })
+    ).data;
+  } catch (error) {
+    console.log("error", error);
+  }
 
-  const jobData: any = await axiosReq<JobApiData[]>({
-    url: "/job",
-    method: "GET",
-  });
+  let jobData: JobApiData[] = [];
+  try {
+    jobData = (
+      await axiosReq<JobApiData[]>({
+        url: "/job",
+        method: "GET",
+      })
+    ).data;
+  } catch (error) {
+    console.log("error", error);
+  }
 
   return (
     <>
@@ -180,7 +194,7 @@ export default async function Home() {
       <section className="border-t border-gray-200 bg-gray-50 bg-muted">
         <MaxWidthWrapper className="py-5">
           <div className="w-full">
-            <TabsContainer job={jobData?.job} interships={res?.internship} />
+            <TabsContainer job={jobData} interships={res} />
           </div>
         </MaxWidthWrapper>
       </section>
