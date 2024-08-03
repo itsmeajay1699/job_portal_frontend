@@ -142,26 +142,25 @@ const perks = [
 ];
 
 export default async function Home() {
-  let res: InternshipApiData[] = [];
+  let res: any;
+
   try {
-    res = (
-      await axiosReq<InternshipApiData[]>({
-        url: "/internship",
-        method: "GET",
-      })
-    ).data;
+    res = await axiosReq<InternshipApiData[]>({
+      url: "/internship",
+      method: "GET",
+    });
+    res = res.data.internship;
   } catch (error) {
     console.log("error", error);
   }
 
-  let jobData: JobApiData[] = [];
+  let jobData: any;
   try {
-    jobData = (
-      await axiosReq<JobApiData[]>({
-        url: "/job",
-        method: "GET",
-      })
-    ).data;
+    jobData = await axiosReq<JobApiData[]>({
+      url: "/job",
+      method: "GET",
+    });
+    jobData = jobData.data.job;
   } catch (error) {
     console.log("error", error);
   }
